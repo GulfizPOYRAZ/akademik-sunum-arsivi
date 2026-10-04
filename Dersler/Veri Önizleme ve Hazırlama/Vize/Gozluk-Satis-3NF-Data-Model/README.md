@@ -6,7 +6,7 @@ Bu çalışma, Veri Önizleme ve Hazırlama dersi kapsamında vize projesi olara
 
 Gözlük mağazasında satılan ürünler ve müşteriler ile ilgili verilerin modellenmesi amaçlanmıştır.
 
-## İçerik
+## İçerik 
 
 Projede aşağıdaki veri yapıları ele alınmıştır:
 
