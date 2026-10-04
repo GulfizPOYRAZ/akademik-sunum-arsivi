@@ -1,22 +1,21 @@
-# Gözlük Satış 3NF Data Model
+# Gözlük Satış 3NF Veri Modeli
 
 Bu çalışma, Veri Önizleme ve Hazırlama dersi kapsamında vize projesi olarak hazırlanmıştır.
 
 ## Amaç
 
-Gözlük mağazasında satılan ürünler ve müşteriler ile ilgili verilerin modellenmesi amaçlanmıştır.
+Gözlük mağazasındaki ürün, müşteri ve satış bilgilerinin ilişkisel veri modeli yapısında düzenlenmesi ve 3NF yaklaşımına uygun biçimde ayrıştırılması amaçlanmıştır.
 
-## İçerik 
+## İçerik
 
 Projede aşağıdaki veri yapıları ele alınmıştır:
 
-- Ürün İsmi
 - Ürün
 - Reçete
 - Cinsiyet
-- Ürün Renkleri
 - Marka
-- Müşteri Profili
+- Ürün Rengi
+- Müşteri Bilgileri
 - Satış Bilgileri
 
 ## Dosya
