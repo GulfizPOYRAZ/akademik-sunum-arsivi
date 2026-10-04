@@ -1,1 +1,1 @@
-# Makine Öğrenmesi
+# Makine  Öğrenmesi
