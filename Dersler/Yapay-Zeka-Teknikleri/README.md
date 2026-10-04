@@ -1,1 +1,1 @@
-# Yapay-Zeka-Teknikleri
+# Yapay-Zeka-Teknikleri 
