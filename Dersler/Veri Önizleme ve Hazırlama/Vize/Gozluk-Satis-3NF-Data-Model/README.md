@@ -14,9 +14,9 @@ Projede aşağıdaki veri yapıları ele alınmıştır:
 - Reçete
 - Cinsiyet
 - Marka
-- Ürün rengi
-- Müşteri bilgileri
-- Satış bilgileri
+- Ürün Rengi
+- Müşteri Bilgileri
+- Satış Bilgileri
 
 ## Dosya
 
