@@ -25,5 +25,6 @@ Vize raporunda özellikle K-NN, Rastgele Orman, Çoklu Doğrusal Regresyon, Kara
 
 ## Dosyalar
 
-- `Makina öğrenmesi vize.docx` — vize makale inceleme raporu
+- `Makina öğrenmesi vize.docx` — vize makale inceleme raporunun düzenlenebilir sürümü
+- `Makina öğrenmesi vize.pdf` — vize makale inceleme raporunun PDF sürümü
 - `Makine Öğrenme Yöntemleri ile Eğitim Başarısının Tahmini Modeli.pdf` — incelenen kaynak makale
