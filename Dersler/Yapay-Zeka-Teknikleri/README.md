@@ -1,1 +1,1 @@
-# Yapay-Zeka-Teknikleri/README.md
+# Yapay-Zeka-Teknikleri
