@@ -5,7 +5,6 @@ Bu çalışma, Makine Öğrenmesi dersi kapsamında final projesi olarak hazırl
 ## Amaç
 
 Diyabet veri seti kullanılarak farklı makine öğrenmesi yöntemlerinin uygulanması ve modellerin tahmin performanslarının karşılaştırılması amaçlanmıştır.
-
 ## Veri Seti
 
 Çalışmada diyabet durumunu tahmin etmek amacıyla aşağıdaki değişkenler kullanılmıştır:
