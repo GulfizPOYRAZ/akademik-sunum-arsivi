@@ -34,4 +34,5 @@ Modeller; Accuracy, Precision, Recall, F1 Score, Confusion Matrix ve ROC-AUC de�
 ## Dosyalar
 
 - `MEME KANSERİ TESPİTİ.pdf`
+- `meme_kanseri.xlsx`
 
