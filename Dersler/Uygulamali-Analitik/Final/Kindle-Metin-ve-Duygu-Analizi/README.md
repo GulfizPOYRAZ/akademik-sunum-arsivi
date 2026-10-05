@@ -8,7 +8,7 @@ Amazon Kindle kullanıcı yorumlarının R programlama dili kullanılarak metin 
 
 ## Veri Seti
 
-Çalışmada Amazon Kindle kullanıcı yorumlarını içeren `preprocessed_kindle_review.csv` veri seti kullanılmıştır. Veri setinde yıldız puanı (`rating`) ve kullanıcı yorumları (`reviewText`) başta olmak üzere ürün ve yorum bilgileri yer almaktadır. :chatgpt-content-reference{index="0"}
+Çalışmada Amazon Kindle kullanıcı yorumlarını içeren `preprocessed_kindle_review.csv` veri seti kullanılmıştır. Veri setinde yıldız puanı (`rating`) ve kullanıcı yorumları (`reviewText`) başta olmak üzere ürün ve yorum bilgileri yer almaktadır.
 
 ## Uygulanan İşlemler
 
