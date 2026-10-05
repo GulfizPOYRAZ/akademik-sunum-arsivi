@@ -9,4 +9,4 @@ Sağlık verilerinin analizi, yapay zeka ve makine öğrenmesinin sağlık alan�
 ## Dosyalar
 
 - Sağlık Analitiği.pdf
-- Sağlık Analitiği.pptx
+
