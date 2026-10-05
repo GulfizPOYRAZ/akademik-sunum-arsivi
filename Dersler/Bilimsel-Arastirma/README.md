@@ -1,1 +1,0 @@
-# Bilimsel Araştırma
