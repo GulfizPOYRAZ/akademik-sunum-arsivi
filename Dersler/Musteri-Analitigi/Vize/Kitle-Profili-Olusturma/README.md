@@ -1,0 +1,1 @@
+# Kitle Profili Oluşturma
