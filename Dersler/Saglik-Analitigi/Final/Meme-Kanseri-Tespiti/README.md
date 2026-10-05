@@ -4,7 +4,7 @@ Bu çalışma, Sağlık Analitiği dersi kapsamında final projesi olarak hazır
 
 ## Amaç
 
-Wisconsin Meme Kanseri veri seti kullanılarak benign ve malign vakaların makine öğrenmesi yöntemleriyle sınıflandırılması ve farklı modellerin performanslarının karşılaştırılması amaçlanmıştır.
+Meme kanseri veri seti kullanılarak nüks durumunun makine öğrenmesi yöntemleriyle sınıflandırılması ve farklı modellerin performanslarının karşılaştırılması amaçlanmıştır.
 
 ## Veri Ön İşleme
 
