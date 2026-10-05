@@ -8,5 +8,5 @@ Sağlık verilerinin analizi, yapay zeka ve makine öğrenmesinin sağlık alan�
 
 ## Dosyalar
 
-- Sağlık Analitiği.pdf
+- SAĞLIK ANALİTİĞİNDE VERİNİN GÜCÜ.pdf
 
