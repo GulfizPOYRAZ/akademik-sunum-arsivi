@@ -1,0 +1,1820 @@
+{
+  "name": "Final_Kart gönderme",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## kadınlar günü kart "
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        816,
+        -32
+      ],
+      "typeVersion": 1,
+      "id": "1491cbd5-6bee-4f34-9759-5485eb82afcd",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## yılbaşı kutlama kartı \n\n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        848,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "96fcf2e5-c1fb-43b5-ac7a-23e13d560c67",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## doğum günü kartı"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        448,
+        -880
+      ],
+      "typeVersion": 1,
+      "id": "0bd0c3c4-37c1-4f32-8c9f-2396f9060ae4",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "employees",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "mail_gonderildi",
+              "condition": "eq",
+              "keyValue": "false"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        -80
+      ],
+      "id": "785cd7be-907c-434f-874f-6179085c9d00",
+      "name": "05- Supabase | Kayıtları Al1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const today = new Date().toISOString().slice(5, 10);\n\nreturn items.filter(item => {\n  const birthDate = item.json.birth_date;\n  if (!birthDate) return false;\n\n  return birthDate.slice(5, 10) === today;\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1152,
+        -816
+      ],
+      "id": "79afc884-11eb-4939-a17c-65ad7a97d79b",
+      "name": "5a-1 – Bugün Doğanları Filtrele"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1054ba48-7471-487b-999d-322447b77f9a",
+              "name": "full_name_normalized",
+              "value": "={{ \n  $json.full_name\n    .toUpperCase()\n    .replace(/Ç/g,'C')\n    .replace(/Ğ/g,'G')\n    .replace(/İ/g,'I')\n    .replace(/Ö/g,'O')\n    .replace(/Ş/g,'S')\n    .replace(/Ü/g,'U')\n    .replace(/ı/g,'I')\n    .replace(/[^A-Z0-9 ]/g,'')\n    .replace(/\\s+/g,' ')\n    .trim()\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -896,
+        -816
+      ],
+      "id": "b628afbf-5512-4deb-b292-2a2b1e04aa20",
+      "name": "5a-2-Metin Alanlarını Düzenle"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "01efae5a-c9a6-4b5b-9383-d153fbd111c7",
+              "leftValue": "={{ $items().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -688,
+        -816
+      ],
+      "id": "7f81d3c3-797d-467a-8169-55569bb49aa1",
+      "name": "5a-3– Bugün Doğan Var mı?"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7d3a1d41-0ad5-4184-a5a1-4f0cf6ffa715",
+              "name": "=avatar_pid",
+              "value": "={{ \n  $('5a-1 – Bugün Doğanları Filtrele').item.json.avatar_url\n    .trim()\n    .split('/')\n    .pop()\n    .replace('.png','')\n    .replace('.jpg','')\n    .replace('.jpeg','')\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -416,
+        -832
+      ],
+      "id": "20f6cc3c-c3bd-4147-bb1c-147d0afc4507",
+      "name": "5a-4-Avatar Görseli Kimliğini Hazırla(id)"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"background_pid\": \"v1766231907/kart2_otmrlk.png\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        -832
+      ],
+      "id": "292b42c6-8644-4e9a-ad45-04decec80383",
+      "name": "5a-5-Arka Plan Görselini Tanımla"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"final_url\": \"{{ \n    'https://res.cloudinary.com/dtivezty8/image/upload/' +\n    'l_image:' + $node['5a-4-Avatar Görseli Kimliğini Hazırla(id)'].json.avatar_pid +\n    ',c_fill,w_355,h_355,r_max,bo_22px_solid_rgb:FFD700,g_center,y_-90/' +\n    'l_text:Arial_50_bold:' +\n    encodeURIComponent($node['5a-4-Avatar Görseli Kimliğini Hazırla(id)'].json.full_name_normalized) +\n    ',co_rgb:000000,g_south,y_120/' +\n    'l_text:Arial_50_bold:DOĞUM%20GÜNÜNÜZ%20KUTLU%20OLSUN,co_rgb:000000,g_south,y_60/' +\n    'v1766231907/kart2_otmrlk.png'\n  }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -32,
+        -832
+      ],
+      "id": "72b2d310-22ef-4f48-ae5a-faaa19b716bf",
+      "name": "5a-6-Kişiye Özel Kart URL’ini Oluştur"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('5a-1 – Bugün Doğanları Filtrele').item.json.email }}",
+        "subject": "=  🎂 {{ $('5a-1 – Bugün Doğanları Filtrele').item.json.full_name }} ! 🎂  DOĞUM GÜNÜNÜZ KUTLU OLSUN! ",
+        "message": "=<div style=\"position:relative; width:255px; margin:auto; font-family:Arial, Helvetica, sans-serif;\">\n  <!-- KART -->\n  <img\n    src=\"{{ $json.final_url }}\"\n    style=\"width:100%; display:block; border-radius:12px;\"\n  />\n\n  <!-- İSİM (ÜSTTE – DENGELİ) -->\n  <div style=\"\n  position:absolute;\n  top:18px;\n  width:100%;\n  text-align:center;\n  font-size:22px;\n  font-weight:700;\n  letter-spacing:1px;\n  color:#d4af37;\n  text-shadow:0 2px 6px rgba(0,0,0,0.6);\n\">\n  \n</div>\n\n  <!-- ALT YAZI -->\n  <div style=\"\n  position:absolute;\n  bottom:22px;\n  width:100%;\n  text-align:center;\n  font-size:16px;\n  font-weight:500;\n  color:#ffffff;\n  text-shadow:0 2px 6px rgba(0,0,0,0.6);\n\">\n  \n</div>\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        352,
+        -832
+      ],
+      "id": "62d36350-807a-4efb-aa22-6a14fd080d5a",
+      "name": "5a-7-Kartı E-posta ile Gönder",
+      "webhookId": "59a6b66f-24ef-4fe6-a546-5ec08b59083f"
+    },
+    {
+      "parameters": {
+        "jsCode": "const nowTR = new Date(\n  new Date().toLocaleString(\"en-US\", { timeZone: \"Europe/Istanbul\" })\n);\n\nconst mm = String(nowTR.getMonth() + 1).padStart(2, \"0\");\nconst dd = String(nowTR.getDate()).padStart(2, \"0\");\n\nreturn [{\n  today_mmdd: `${mm}-${dd}`\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1792,
+        -80
+      ],
+      "id": "049c32d0-9b48-478f-9796-89b579eaeb93",
+      "name": "03 – Bugün (TR)"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -2032,
+        32
+      ],
+      "id": "ae6ad8a0-029e-4f45-8206-490ced44ffd3",
+      "name": "02- Günlük Tetikleyici1",
+      "retryOnFail": false,
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "d8b5e0e3-cc58-4a3d-9afc-9bef24632b4d",
+      "name": "00 - Manuel Başlatma",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        -2000,
+        -160
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        144,
+        -832
+      ],
+      "id": "a61bd71e-966e-457b-ab09-db29358e3edf",
+      "name": "Wait3",
+      "webhookId": "37301e90-49dd-414c-8ba0-d57bffcc8f9a"
+    },
+    {
+      "parameters": {
+        "content": "## doğum günü kişisinin arkadaşlarına hatırlatma mesajı "
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1472,
+        -256
+      ],
+      "typeVersion": 1,
+      "id": "fcceb823-68b5-40eb-8422-7a4459a714dd",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": []
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        -240
+      ],
+      "id": "4775d26c-a2f7-4d21-94be-0bf198251363",
+      "name": "12b- text_fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      full_name_email_list: items.map(i => ({\n        full_name: i.json.full_name,\n        email: i.json.email,\n        avatar_url: i.json.avatar_url\n          ? i.json.avatar_url.trim().replace(/\\s+/g, '')\n          : null\n      }))\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        -560
+      ],
+      "id": "f7bd5814-4dae-42f0-8c13-67891f3bfb6c",
+      "name": "05b-1 – İsim & Email Listesini Hazırla1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const targetDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)\n  .toISOString()\n  .slice(5,10); // MM-DD\n\nreturn items.map(item => ({\n  json: {\n    ...item.json,\n    target_mmdd: targetDate\n  }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1152,
+        -288
+      ],
+      "id": "d76522a9-50df-4f59-ab4a-8a44675ee1a6",
+      "name": "05c-1 – Hedef Tarih (7 Gün Sonrası) Oluştur1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = [];\n\nfor (const item of items) {\n  const birth = new Date(item.json.birth_date);\n  const mm = String(birth.getMonth() + 1).padStart(2, '0');\n  const dd = String(birth.getDate()).padStart(2, '0');\n  const birth_mmdd = `${mm}-${dd}`;\n\n  if (birth_mmdd === item.json.target_mmdd) {\n    result.push({\n      json: {\n        ...item.json,\n\n        x_name: item.json.full_name,\n        x_birth_date: item.json.birth_date,\n\n        // 🔴 URL TEMİZLEME (satır sonu + boşluk TAMAMEN gider)\n        x_avatar_url: item.json.avatar_url\n          ? item.json.avatar_url\n              .replace(/[\\r\\n]/g, '')   // \\n ve \\r sil\n              .replace(/\\s+/g, '')      // boşluk sil\n          : null\n      }\n    });\n  }\n}\n\nreturn result;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -944,
+        -288
+      ],
+      "id": "eec25190-a305-4354-823c-44c780109056",
+      "name": "05c-2 – Kişilerin Doğum Tarihini MM-DD Formatına Çevir1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d2db5353-2337-4bd4-8a06-a5d408cb6171",
+              "leftValue": "={{ $json.full_name }}",
+              "rightValue": "X NAME",
+              "operator": {
+                "type": "boolean",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": "={{ true}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -736,
+        -288
+      ],
+      "id": "8c08d1ec-1441-41cd-a045-38576583293e",
+      "name": "05c-3 – 1 Hafta Sonra Doğum Günü Var mı? (Kontrol)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const birthDate = item.json.birth_date;\n  const targetMMDD = item.json.target_mmdd;\n\n  const mmdd = birthDate.slice(5, 10);\n\n  item.json.isBirthday = (mmdd === targetMMDD);\n\n  return item;\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        -304
+      ],
+      "id": "4d382385-4b42-4055-9dd4-4ef421db9a9a",
+      "name": "05c-4- Doğum Günü Sahibini İşaretle((isBirthday)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const todayMMDD = items[0].json.target_mmdd;\n\n// Doğum günü olan kişiyi bul\nconst birthday = items.find(\n  i => i.json.birth_date?.slice(5, 10) === todayMMDD\n);\n\nreturn items.map(item => ({\n  json: {\n    // Her alıcı için kendi bilgiler\n    receiver_name: item.json.full_name,\n    email: item.json.email,\n\n    // Doğum günü olan kişiye ait ortak bilgiler\n    birthday_person_name: birthday\n      ? birthday.json.full_name\n      : null,\n\n    birthday_avatar_url: birthday\n      ? birthday.json.avatar_url\n      : null,\n\n    // ✅ Doğum günü tarihi (YYYY-MM-DD formatında gelir)\n    birthday_date: birthday\n      ? birthday.json.birth_date\n      : null\n  }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -288,
+        -304
+      ],
+      "id": "d04a9667-e82f-490f-96b9-8ce051771ba5",
+      "name": "05c-5- Doğum Günü Sahibini İşaretle((mail alanlarını hazırlayan)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ⚠️ items = önceki node'dan gelen TÜM kayıtlar\n\n// 1. Yeni eklenen kısım: Toplam sayıyı hesaplar\nconst dogum_gunu_sayisi = items.filter(item => item.json.birthday_person_name).length;\n\nreturn items\n  // sadece doğum günü olanlar (birthday_person_name varsa)\n  .filter(item => item.json.birthday_person_name)\n  \n  // n8n formatı: HER item için { json: {...} }\n  .map(item => ({\n    json: {\n      ...item.json,   // 🔒 HER ŞEY AYNEN KALSIN (Senin kodun)\n      \n      // 2. Yeni eklenen kısım: Sayıyı verinin içine tanımlar\n      kisi_sayisi: dogum_gunu_sayisi \n    }\n  }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -112,
+        -304
+      ],
+      "id": "f29909e2-3d15-42c7-b001-f3c7f89c1113",
+      "name": "05c-6 – Doğum Günü Olan Kayıtları Filtrele1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        48,
+        -544
+      ],
+      "id": "d72916e8-7916-4e2f-a320-54a86d948145",
+      "name": "05c-7 – Akışları Birleştir (Append)1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "jsCode": "// 🔹 Merge’den gelen TÜM item’ları tek JSON’da birleştir\nconst base = items.reduce((acc, item) => {\n  return { ...acc, ...item.json };\n}, {});\n\n// 🔹 Doğum günü olan kişinin adı\nconst birthdayName = base.birthday_person_name;\n\n// 🔹 Tüm isim listesi\nconst list = base.full_name_email_list || [];\n\n// 🔹 Aynı isimdekiler (doğum günü sahibi)\nconst same_name_list = list.filter(\n  i => i.full_name === birthdayName\n);\n\n// 🔹 Farklı isimdekiler\nconst different_name_list = list.filter(\n  i => i.full_name !== birthdayName\n);\n\n// 🔹 TEK item döndür (n8n kuralı)\nreturn [\n  {\n    json: {\n      ...base,              // ✅ birthday_date ARTIK KAYBOLMAZ\n      same_name_list,\n      different_name_list\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        -544
+      ],
+      "id": "d2941ac2-bdeb-4d7d-986f-7b75bfff8497",
+      "name": "05c-8 – Doğum Günü Sahibi ve Arkadaşları Ayır1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "44af0561-8641-48b8-9cdd-e7c9464f1fbd",
+              "leftValue": "={{ Boolean($json.different_name_list?.length) }}",
+              "rightValue": "=0\n",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        432,
+        -544
+      ],
+      "id": "b923435f-dfdb-43c7-869e-168d1d9b9e6e",
+      "name": "05c-9 – Doğum Günü Harici Alıcı Var mı?1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Farklı isimdekiler (mail gidecek kişiler)\nconst differentList = $json.different_name_list || [];\n\n// Ortak bilgiler (doğum günü sahibinden)\nconst birthdayAvatarUrl = $json.birthday_avatar_url || null;\nconst birthdayPersonName = $json.birthday_person_name || null;\nconst birthdayDate = $json.birthday_date || null;\n\n// Her kişiyi AYRI item olarak çıkar\nreturn differentList.map(person => ({\n  json: {\n    full_name: person.full_name,\n    email: person.email,\n    birthday_avatar_url: birthdayAvatarUrl,\n    birthday_person_name: birthdayPersonName,\n    birthday_date: birthdayDate\n  }\n}));\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1008,
+        -544
+      ],
+      "id": "5743a82a-f509-42fe-879d-ab86447e6518",
+      "name": "05c-10 – Doğum Günü Harici Alıcıları Ayrı Item’lara Böl1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9c3ba17d-5ff0-46db-8a48-1cdd37687aac",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "7241c009-f31c-41fd-9543-964ee5a65ecf",
+              "name": "birthday_person_name",
+              "value": "={{ $json.birthday_person_name }}",
+              "type": "string"
+            },
+            {
+              "id": "0e5ce010-e708-4211-9654-25695cab8298",
+              "name": "birthday_avatar_url",
+              "value": "={{ $json.birthday_avatar_url }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1232,
+        -544
+      ],
+      "id": "741138fb-452e-4576-9ec7-7399aa736b94",
+      "name": "05c-11– Mail Alıcı Bilgilerini (Email + Doğum Günü Meta) Ekle1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "af124105-103a-47ca-af29-e92d3f5a7f05",
+              "name": "message",
+              "value": "={{ $json.birthday_person_name }}’nin doğum günü 1 hafta sonra 🎉\nHazırlık yapmayı unutmayın.",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1408,
+        -544
+      ],
+      "id": "17c4727a-6028-45fb-8290-ea0ff37b171f",
+      "name": "05c-12 – 1 Hafta Sonra Doğum Günü Bilgilendirme Mesajı1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4cf66946-ad8a-4fde-a131-9de94219e965",
+              "name": "avatar_public_id",
+              "value": "={{ $json.birthday_avatar_url.replace('\\n','').split('/upload/')[1].split('.')[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1568,
+        -544
+      ],
+      "id": "fa690d38-0d8d-48bf-afb8-cfc0cba5b537",
+      "name": "05c-13 – Avatar Public ID Çıkar (Cloudinary URL’den)1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"card_url\": \"https://res.cloudinary.com/dtivezty8/image/upload/l_image:,c_fill,w_320,h_320,r_max,bo_22px_solid_rgb:4A5FBF,g_center,y_-155/l_text:Arial_50:ORNEK PERSONEL,co_rgb:4A5FBF,g_south,y_360/l_text:Arial_46:7%20Ocak,co_rgb:4A5FBF,g_south,y_273/v1767223650/HatirlatmaKarti_jdjfuq.png\"}",
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        272,
+        -240
+      ],
+      "id": "465951fb-5b80-47e2-94fd-eb0d48ffeb0e",
+      "name": "05c-14 – Background Public ID (Kart Arka Planı / Cloudinary)1"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const data = $json;\n\nconst avatarRaw = data.avatar_public_id || \"\";\nconst avatarClean = avatarRaw.replace(/^v\\d+\\//, \"\");\n\nconst bg = data.background_public_id || \"HatirlatmaKarti_jdjfuq\";\n\nconst name = encodeURIComponent(data.birthday_person_name || \"\");\nconst d = new Date(data.birthday_date);\nconst months = [\"Ocak\",\"Şubat\",\"Mart\",\"Nisan\",\"Mayıs\",\"Haziran\",\"Temmuz\",\"Ağustos\",\"Eylül\",\"Ekim\",\"Kasım\",\"Aralık\"];\nconst dateText = encodeURIComponent(\n  `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`\n);\n\n\nconst cloud = \"dtivezty8\";\n\nconst card_url =\n  `https://res.cloudinary.com/${cloud}/image/upload/` +\n  `l_image:${avatarClean},c_fill,w_352,h_352,r_max,bo_22px_solid_rgb:4A5FBF,g_center,y_-165/` +\n  `l_text:Arial_50_bold:${name},co_rgb:4A5FBF,g_south,y_320/` +\n  `l_text:Arial_46:${dateText},co_rgb:4A5FBF,g_south,y_273/` +\n  `${bg}.png`;\n\n// ⚠️ ARRAY YOK\nreturn {\n  ...data,\n  avatar_clean_id: avatarClean,\n  card_url\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        688,
+        -240
+      ],
+      "id": "1c5efc09-3742-4d9e-955f-b365ce3776f5",
+      "name": "05c-15-Cloudinary Kart Verisi Hazırlama (Kişi Bazlı)1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "be1e6599-5126-4da3-87b7-f811bb9d2d76",
+              "name": "mesaj_final_url",
+              "value": "=https://res.cloudinary.com/dtivezty8/image/upload/l_image:ORNEK_AVATAR_PUBLIC_ID,c_fill,w_320,h_320,r_max,bo_22px_solid_rgb:4A5FBF,g_center,y_-155/l_text:Arial_50_bold:Ceren%20POYRAZ,co_rgb:4A5FBF,g_south,y_360/l_text:Arial_46:2020-01-07,co_rgb:4A5FBF,g_south,y_273/Hatirlatmakarti_ypss1r.png",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        912,
+        -240
+      ],
+      "id": "982a6093-9dee-4600-b80b-f3d11125135c",
+      "name": "05c-16-Final Cloudinary Kart URL Oluşturma1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "={{ $json.full_name }} , bir arkadaşının doğum günü yaklaşıyor ! 🎂",
+        "message": "=<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n  <tr>\n    <td style=\"text-align:center;\">\n      <img \n        src=\"{{ $json.card_url }}\" \n        style=\"max-width:272px;width:100%;display:block;margin:0 auto;\"\n      />\n    </td>\n  </tr>\n</table>\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1296,
+        -240
+      ],
+      "id": "63e44620-9fde-43db-a96d-7fdb933dc1fa",
+      "name": "05c-17-Yaklaşan Doğum Günü Bildirim Maili Gönderimi1",
+      "webhookId": "1039cd78-9514-40db-86a3-3e3081da6fdc"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1088,
+        -240
+      ],
+      "id": "4ac6cdd2-e1d8-41fe-b6ad-83a999cb10c5",
+      "name": "Wait",
+      "webhookId": "37301e90-49dd-414c-8ba0-d57bffcc8f9a"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "86b605d3-15dd-4365-bdad-806449a1ba47",
+              "leftValue": "={{ $json.kisi_sayisi }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        -528
+      ],
+      "id": "44fa6212-d885-4bac-ae74-3eec91cf1903",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const fullName = $json.full_name;\n\n// Kelimelere ayır\nconst parts = fullName.trim().split(/\\s+/);\n\n// Varsayılanlar\nlet brokenName = fullName;\nlet fontSize = 42;\nlet nameY = 0;\n\n// En az 3 kelime varsa ilk iki kelimeyi kontrol et\nif (parts.length >= 3) {\n  const firstTwo = `${parts[0]} ${parts[1]}`;\n\n  // İlk iki kelime + boşluk 15 karakterden uzunsa kır\n  if (firstTwo.length > 15) {\n    const firstLine = firstTwo;\n\n    // ⬇⬇⬇ SAĞA KAYDIRMA (3 BOŞLUK)\n    const secondLine = \"          \" + parts.slice(2).join(\" \");\n\n    brokenName = `${firstLine}%0A${secondLine}`;\n    nameY = -15;\n  }\n}\n\n// SADECE görselde kullanılacak alanlar\nreturn {\n  broken_name: brokenName,\n  name_font_size: fontSize,\n  name_y: nameY\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -688,
+        0
+      ],
+      "id": "cc47ff27-cc03-4800-950f-d9ce58ae54b3",
+      "name": "05d-1 – İsim Bölme ve Kart Yazısına Uygun Hale Getirme1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cb560bd3-f4ea-4243-8b14-70e10fe1aad5",
+              "name": "title",
+              "value": "🌸✨ DÜNYA KADINLAR GÜNÜNÜZ KUTLU OLSUN ✨🌸",
+              "type": "string"
+            },
+            {
+              "id": "20788bc7-48b8-4a7f-8e61-22738946093d",
+              "name": "message",
+              "value": "🌸 Gücüyle, emeğiyle ve ilhamıyla dünyayı güzelleştiren tüm kadınların Dünya Kadınlar Günü’nü en içten dileklerimizle kutlarız.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -512,
+        0
+      ],
+      "id": "cb304a6c-5096-4dd5-bb6e-b7c744b46a02",
+      "name": "05d-2 – Kart Metni (Standart)1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c4523bbc-9057-4def-9c53-6b1228fd9041",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "9f95fb01-d899-4aae-9ddd-721231282fd2",
+              "name": "message",
+              "value": "={{ $json.message }}",
+              "type": "string"
+            },
+            {
+              "id": "15108b9d-af44-4f2b-9fe7-87e46cc2753c",
+              "name": "card_url",
+              "value": "=https://res.cloudinary.com/dtivezty8/image/upload/v1767788824/kadinlargunu_1_w5phib.png",
+              "type": "string"
+            },
+            {
+              "id": "4d6943c0-d7fd-46cf-a7e6-9f8ae0f1ee63",
+              "name": "avatar_url",
+              "value": "={{ $('05- Supabase | Kayıtları Al1').item.json.avatar_url }}",
+              "type": "string"
+            },
+            {
+              "id": "4f58771f-e71e-4c4a-a157-3f0ddbda5a84",
+              "name": "email",
+              "value": "={{ $('05- Supabase | Kayıtları Al1').item.json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "0a43b653-db05-4872-9d90-2dbc9167b673",
+              "name": "full_name",
+              "value": "={{ $('05- Supabase | Kayıtları Al1').item.json.full_name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -336,
+        0
+      ],
+      "id": "85605634-3f91-42a9-a926-c2f79ac30136",
+      "name": "05d-3 – Kart İçeriği ve Alıcı Bilgilerini Birleştir1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8df61408-39ec-4b38-ab71-616699f9ff16",
+              "name": "avatar_pid",
+              "value": "={{    $json.avatar_url     .trim()     .split('/')     .pop()     .replace('.png','')     .replace('.jpg','')     .replace('.jpeg','') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -128,
+        0
+      ],
+      "id": "8f771a7a-ab5c-4386-9258-315cab3d4693",
+      "name": "05d-4-avatar_public_id"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"background_pid\": \"v1767788824/kadinlargunu_1_w5phib\"\n}\n",
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        0
+      ],
+      "id": "1ae076a0-8253-4f97-a636-e3af92143010",
+      "name": "05d-5– Arka Plan Public ID Tanımı1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4c09c534-1b83-4536-a853-f6a19c6eac19",
+              "name": "final_url",
+              "value": "={{\n'https://res.cloudinary.com/dtivezty8/image/upload/' +\n'l_image:' + $node[\"05d-4-avatar_public_id\"].json.avatar_pid +\n',c_fill,w_300,h_300,r_max,g_north,x_5,y_65/' +\n'l_text:Arial_50_bold:' +\nencodeURIComponent($node[\"05d-1 – İsim Bölme ve Kart Yazısına Uygun Hale Getirme1\"].json.broken_name) +\n',co_rgb:FBC02D,g_north,x_5,y_550/' +\n$node[\"05d-5– Arka Plan Public ID Tanımı1\"].json.background_pid\n}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        288,
+        0
+      ],
+      "id": "e4179957-c479-4dd4-aeaf-afb46a78ec48",
+      "name": "05d-6 – Final Kart URL Oluşturma1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('05d-4-avatar_public_id').item.json.email }}",
+        "subject": "={{ $('05d-4-avatar_public_id').item.json.full_name }}🌸✨ DÜNYA KADINLAR GÜNÜNÜZ KUTLU OLSUN ✨🌸",
+        "message": "=<p style=\"font-size:15px\">\n🌸 Gücüyle, emeğiyle ve ilhamıyla dünyayı güzelleştiren tüm kadınların\nDünya Kadınlar Günü’nü en içten dileklerimizle kutlarız.\n</p>\n<table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#F7EFE6;\">\n  <tr>\n    <!-- SOL BALON -->\n    <td align=\"left\" valign=\"middle\" style=\"background:#F7EFE6; padding-left:10px;\">\n      <img\n        src=\"https://res.cloudinary.com/dtivezty8/image/upload/v1767786590/balloons_drrk5e.gif\"\n        height=\"280\"\n        style=\"display:block;\"\n        alt=\"Kutlama Balonları\"\n      >\n    </td>\n\n    <!-- ORTA KART (OPTİK YAKLAŞMA BURADA) -->\n    <td \n      align=\"center\" \n      valign=\"middle\" \n      style=\"\n        background:#F7EFE6;\n        padding-left:14px;\n        padding-right:14px;\n      \"\n    >\n      <img \n        src=\"{{ $json.final_url }}\"\n        height=\"280\"\n        style=\"display:block;\"\n        alt=\"8 Mart Kadınlar Günü Kartı\"\n      >\n    </td>\n\n    <!-- SAĞ BALON -->\n    <td align=\"center\" valign=\"middle\" style=\"background:#F7EFE6;\">\n      <img \n        src=\"https://res.cloudinary.com/dtivezty8/image/upload/v1767786590/balloons_drrk5e.gif\"\n        height=\"280\"\n        style=\"display:block;\"\n        alt=\"Kutlama Balonları\"\n      >\n    </td>\n  </tr>\n</table>\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        0
+      ],
+      "id": "480fefb1-4f10-4bae-a797-1c21248b30a4",
+      "name": "05d-7 – Özel Günler Kartı E-posta ile Gönder (Final)1",
+      "webhookId": "59a6b66f-24ef-4fe6-a546-5ec08b59083f",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "735214ba-b6fc-48ef-80a1-34a63a9be468",
+              "leftValue": "={{ $items().some(item => item.json.full_name === \"8 MART\") || $now.format('MM-DD') === \"03-08\" }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1168,
+        32
+      ],
+      "id": "1230042a-d211-4f4f-b2d7-6565ac20ef3e",
+      "name": "05c-0- Özel Gün Kontrolü1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        496,
+        0
+      ],
+      "id": "aecfd385-5bce-4894-88d7-f95897f995c3",
+      "name": "Wait4",
+      "webhookId": "37301e90-49dd-414c-8ba0-d57bffcc8f9a"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67b1990a-5479-4704-b6ed-95dfc077caf0",
+              "leftValue": "={{ $json.gender == \"Kadın\" }}",
+              "rightValue": "Erkek",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -928,
+        16
+      ],
+      "id": "2e204468-1b96-4d68-b52e-e1ba9e4c2d07",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cb560bd3-f4ea-4243-8b14-70e10fe1aad5",
+              "name": "title",
+              "value": "Yeni Yılınız Kutlu Olsun",
+              "type": "string"
+            },
+            {
+              "id": "20788bc7-48b8-4a7f-8e61-22738946093d",
+              "name": "message",
+              "value": "Yeni yılın size; sağlık, huzur ve başarı getirmesini diliyoruz.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -704,
+        272
+      ],
+      "id": "ae8e6e6b-d6b8-40ba-9e61-326d4136f699",
+      "name": "05e-1 – Kart Metni (Yeni Yıl / Standart)1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c4523bbc-9057-4def-9c53-6b1228fd9041",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "9f95fb01-d899-4aae-9ddd-721231282fd2",
+              "name": "message",
+              "value": "={{ $json.message }}",
+              "type": "string"
+            },
+            {
+              "id": "15108b9d-af44-4f2b-9fe7-87e46cc2753c",
+              "name": "card_url",
+              "value": "=https://res.cloudinary.com/dtivezty8/image/upload/v1766876404/yilbasi_jtufky.png",
+              "type": "string"
+            },
+            {
+              "id": "4d6943c0-d7fd-46cf-a7e6-9f8ae0f1ee63",
+              "name": "avatar_url",
+              "value": "={{ $('05- Supabase | Kayıtları Al1').item.json.avatar_url }}",
+              "type": "string"
+            },
+            {
+              "id": "4f58771f-e71e-4c4a-a157-3f0ddbda5a84",
+              "name": "email",
+              "value": "={{ $('05- Supabase | Kayıtları Al1').item.json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "0a43b653-db05-4872-9d90-2dbc9167b673",
+              "name": "full_name",
+              "value": "={{ $('05- Supabase | Kayıtları Al1').item.json.full_name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -528,
+        272
+      ],
+      "id": "2780440b-8247-43ad-ae8b-886dd4a548c3",
+      "name": "05e-2 – Kart Verilerini Birleştir (Yeni Yıl)1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8df61408-39ec-4b38-ab71-616699f9ff16",
+              "name": "avatar_pid",
+              "value": "={{    $json.avatar_url     .trim()     .split('/')     .pop()     .replace('.png','')     .replace('.jpg','')     .replace('.jpeg','') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -320,
+        272
+      ],
+      "id": "603bb80c-7c6e-4ff7-933f-a803126efccb",
+      "name": "05e-3 – Avatar Public ID Çıkar1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"background_pid\": \"v1766876404/yilbasi_jtufky\"\n}\n",
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -96,
+        272
+      ],
+      "id": "fc855017-7ad0-4b00-8a9b-54bbe51bd23e",
+      "name": "05e-4 – Arka Plan Public ID Tanımı1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4c09c534-1b83-4536-a853-f6a19c6eac19",
+              "name": "final_url",
+              "value": "={{\n'https://res.cloudinary.com/dtivezty8/image/upload/' +\n'l_image:' + $node[\"05e-3 – Avatar Public ID Çıkar1\"].json.avatar_pid +\n',c_fill,w_253,h_253,r_max,g_center,x_-240,y_-1/' +\n'l_text:Arial_42_bold:' +\nencodeURIComponent($node[\"05e-3 – Avatar Public ID Çıkar1\"].json.full_name) +\n',co_rgb:2E7D32,g_north,x_175,y_235/' +\n$node[\"05e-4 – Arka Plan Public ID Tanımı1\"].json.background_pid}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        128,
+        272
+      ],
+      "id": "66d538f7-2e3e-40c8-b7d8-3c8a2fe8d098",
+      "name": "05e-5 – Final URL Oluşturma1"
+    },
+    {
+      "parameters": {
+        "url": "=https://res.cloudinary.com/dtivezty8/image/upload/v1767003607/New_Year_Party_GIF_vgpkj4.gif\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        336,
+        272
+      ],
+      "id": "568f403f-a5cd-48c1-9a6a-77145f30d67c",
+      "name": "05e-6 – Kart GIF’ini Getir (Cloudinary)1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('05- Supabase | Kayıtları Al1').item.json.email }}",
+        "subject": "=🎉 YENİ YILINIZ KUTLU OLSUN 🎉",
+        "message": "=<table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#C62828;\">\n  <tr>\n    <td align=\"center\" valign=\"middle\" style=\"background:#C62828;\">\n      <img \n        src=\"https://res.cloudinary.com/dtivezty8/image/upload/v1767003607/New_Year_Party_GIF_vgpkj4.gif\"\n        height=\"280\"\n        style=\"display:block;\"\n      >\n    </td>\n\n    <td align=\"center\" valign=\"middle\" style=\"background:#C62828;\">\n      <img \n        src=\"{{ $json.final_url }}\"\n        height=\"280\"\n        style=\"display:block;\"\n      >\n    </td>\n\n    <td align=\"center\" valign=\"middle\" style=\"background:#C62828;\">\n      <img \n        src=\"https://res.cloudinary.com/dtivezty8/image/upload/v1767003607/New_Year_Party_GIF_vgpkj4.gif\"\n        height=\"280\"\n        style=\"display:block;\"\n      >\n    </td>\n  </tr>\n</table>\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        704,
+        272
+      ],
+      "id": "21d88c12-3090-456f-a96e-15ab32d2e0a6",
+      "name": "05e-7 – Yeni Yıl Tebrik Maili Gönder1",
+      "webhookId": "59a6b66f-24ef-4fe6-a546-5ec08b59083f"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cc1954d8-1474-4570-910f-1932dab6a87a",
+              "leftValue": "={{ $items().some(item => item.json.full_name === \"Yılbası\") || $now.format('MM-DD') === \"01-01\" }}",
+              "rightValue": "=\n",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1216,
+        304
+      ],
+      "id": "119b2593-f106-475c-bd67-453e562689a3",
+      "name": "05d-0- Özel Gün Kontrolü1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        512,
+        272
+      ],
+      "id": "6e645680-2c97-4c5a-bb18-a6947c4821b3",
+      "name": "Wait1",
+      "webhookId": "37301e90-49dd-414c-8ba0-d57bffcc8f9a"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cc1954d8-1474-4570-910f-1932dab6a87a",
+              "leftValue": "={{ $json.gender !== \"Yok\" && $json.gender !== \"\" && $json.gender !== null }}",
+              "rightValue": "=01-01\n",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -992,
+        288
+      ],
+      "id": "bd050a43-22b0-4704-8567-bd7c0d0b4fb3",
+      "name": "05d-0- Yılbaşı Kontrolü"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "67b1990a-5479-4704-b6ed-95dfc077caf0",
+              "leftValue": "={{ $json.full_name != \"8 MART\" && $json.full_name != \"Yılbası\" && $json.cinsiyet != \"Yok\" }}",
+              "rightValue": "GEC",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1088,
+        -576
+      ],
+      "id": "f92aba80-d9c4-4725-850e-5cd1c63720c9",
+      "name": "If1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "05- Supabase | Kayıtları Al1": {
+      "main": [
+        [
+          {
+            "node": "5a-1 – Bugün Doğanları Filtrele",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "05c-1 – Hedef Tarih (7 Gün Sonrası) Oluştur1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "05c-0- Özel Gün Kontrolü1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "05d-0- Özel Gün Kontrolü1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5a-1 – Bugün Doğanları Filtrele": {
+      "main": [
+        [
+          {
+            "node": "5a-2-Metin Alanlarını Düzenle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5a-2-Metin Alanlarını Düzenle": {
+      "main": [
+        [
+          {
+            "node": "5a-3– Bugün Doğan Var mı?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5a-3– Bugün Doğan Var mı?": {
+      "main": [
+        [
+          {
+            "node": "5a-4-Avatar Görseli Kimliğini Hazırla(id)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5a-4-Avatar Görseli Kimliğini Hazırla(id)": {
+      "main": [
+        [
+          {
+            "node": "5a-5-Arka Plan Görselini Tanımla",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5a-5-Arka Plan Görselini Tanımla": {
+      "main": [
+        [
+          {
+            "node": "5a-6-Kişiye Özel Kart URL’ini Oluştur",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5a-6-Kişiye Özel Kart URL’ini Oluştur": {
+      "main": [
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "03 – Bugün (TR)": {
+      "main": [
+        [
+          {
+            "node": "05- Supabase | Kayıtları Al1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "02- Günlük Tetikleyici1": {
+      "main": [
+        [
+          {
+            "node": "03 – Bugün (TR)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "00 - Manuel Başlatma": {
+      "main": [
+        [
+          {
+            "node": "03 – Bugün (TR)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "5a-7-Kartı E-posta ile Gönder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "12b- text_fields": {
+      "main": [
+        [
+          {
+            "node": "05c-15-Cloudinary Kart Verisi Hazırlama (Kişi Bazlı)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05b-1 – İsim & Email Listesini Hazırla1": {
+      "main": [
+        [
+          {
+            "node": "05c-7 – Akışları Birleştir (Append)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-1 – Hedef Tarih (7 Gün Sonrası) Oluştur1": {
+      "main": [
+        [
+          {
+            "node": "05c-2 – Kişilerin Doğum Tarihini MM-DD Formatına Çevir1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-2 – Kişilerin Doğum Tarihini MM-DD Formatına Çevir1": {
+      "main": [
+        [
+          {
+            "node": "05c-3 – 1 Hafta Sonra Doğum Günü Var mı? (Kontrol)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-3 – 1 Hafta Sonra Doğum Günü Var mı? (Kontrol)1": {
+      "main": [
+        [
+          {
+            "node": "05c-4- Doğum Günü Sahibini İşaretle((isBirthday)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-4- Doğum Günü Sahibini İşaretle((isBirthday)1": {
+      "main": [
+        [
+          {
+            "node": "05c-5- Doğum Günü Sahibini İşaretle((mail alanlarını hazırlayan)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-5- Doğum Günü Sahibini İşaretle((mail alanlarını hazırlayan)": {
+      "main": [
+        [
+          {
+            "node": "05c-6 – Doğum Günü Olan Kayıtları Filtrele1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-6 – Doğum Günü Olan Kayıtları Filtrele1": {
+      "main": [
+        [
+          {
+            "node": "05c-7 – Akışları Birleştir (Append)1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "05c-7 – Akışları Birleştir (Append)1": {
+      "main": [
+        [
+          {
+            "node": "05c-8 – Doğum Günü Sahibi ve Arkadaşları Ayır1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-8 – Doğum Günü Sahibi ve Arkadaşları Ayır1": {
+      "main": [
+        [
+          {
+            "node": "05c-9 – Doğum Günü Harici Alıcı Var mı?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-9 – Doğum Günü Harici Alıcı Var mı?1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-10 – Doğum Günü Harici Alıcıları Ayrı Item’lara Böl1": {
+      "main": [
+        [
+          {
+            "node": "05c-11– Mail Alıcı Bilgilerini (Email + Doğum Günü Meta) Ekle1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-11– Mail Alıcı Bilgilerini (Email + Doğum Günü Meta) Ekle1": {
+      "main": [
+        [
+          {
+            "node": "05c-12 – 1 Hafta Sonra Doğum Günü Bilgilendirme Mesajı1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-12 – 1 Hafta Sonra Doğum Günü Bilgilendirme Mesajı1": {
+      "main": [
+        [
+          {
+            "node": "05c-13 – Avatar Public ID Çıkar (Cloudinary URL’den)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-13 – Avatar Public ID Çıkar (Cloudinary URL’den)1": {
+      "main": [
+        [
+          {
+            "node": "05c-14 – Background Public ID (Kart Arka Planı / Cloudinary)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-14 – Background Public ID (Kart Arka Planı / Cloudinary)1": {
+      "main": [
+        [
+          {
+            "node": "12b- text_fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-15-Cloudinary Kart Verisi Hazırlama (Kişi Bazlı)1": {
+      "main": [
+        [
+          {
+            "node": "05c-16-Final Cloudinary Kart URL Oluşturma1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-16-Final Cloudinary Kart URL Oluşturma1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "05c-17-Yaklaşan Doğum Günü Bildirim Maili Gönderimi1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "05c-10 – Doğum Günü Harici Alıcıları Ayrı Item’lara Böl1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05d-1 – İsim Bölme ve Kart Yazısına Uygun Hale Getirme1": {
+      "main": [
+        [
+          {
+            "node": "05d-2 – Kart Metni (Standart)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05d-2 – Kart Metni (Standart)1": {
+      "main": [
+        [
+          {
+            "node": "05d-3 – Kart İçeriği ve Alıcı Bilgilerini Birleştir1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05d-3 – Kart İçeriği ve Alıcı Bilgilerini Birleştir1": {
+      "main": [
+        [
+          {
+            "node": "05d-4-avatar_public_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05d-4-avatar_public_id": {
+      "main": [
+        [
+          {
+            "node": "05d-5– Arka Plan Public ID Tanımı1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05d-5– Arka Plan Public ID Tanımı1": {
+      "main": [
+        [
+          {
+            "node": "05d-6 – Final Kart URL Oluşturma1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05d-6 – Final Kart URL Oluşturma1": {
+      "main": [
+        [
+          {
+            "node": "Wait4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05c-0- Özel Gün Kontrolü1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait4": {
+      "main": [
+        [
+          {
+            "node": "05d-7 – Özel Günler Kartı E-posta ile Gönder (Final)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "05d-1 – İsim Bölme ve Kart Yazısına Uygun Hale Getirme1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05e-1 – Kart Metni (Yeni Yıl / Standart)1": {
+      "main": [
+        [
+          {
+            "node": "05e-2 – Kart Verilerini Birleştir (Yeni Yıl)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05e-2 – Kart Verilerini Birleştir (Yeni Yıl)1": {
+      "main": [
+        [
+          {
+            "node": "05e-3 – Avatar Public ID Çıkar1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05e-3 – Avatar Public ID Çıkar1": {
+      "main": [
+        [
+          {
+            "node": "05e-4 – Arka Plan Public ID Tanımı1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05e-4 – Arka Plan Public ID Tanımı1": {
+      "main": [
+        [
+          {
+            "node": "05e-5 – Final URL Oluşturma1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05e-5 – Final URL Oluşturma1": {
+      "main": [
+        [
+          {
+            "node": "05e-6 – Kart GIF’ini Getir (Cloudinary)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05e-6 – Kart GIF’ini Getir (Cloudinary)1": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05d-0- Özel Gün Kontrolü1": {
+      "main": [
+        [
+          {
+            "node": "05d-0- Yılbaşı Kontrolü",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "05e-7 – Yeni Yıl Tebrik Maili Gönder1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05d-0- Yılbaşı Kontrolü": {
+      "main": [
+        [
+          {
+            "node": "05e-1 – Kart Metni (Yeni Yıl / Standart)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "05b-1 – İsim & Email Listesini Hazırla1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f28eedad-922c-4665-90a1-6616340b6853",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "REMOVED_FOR_GITHUB"
+  },
+  "id": "1ZG3tDbPkswDEV2e",
+  "tags": []
+}

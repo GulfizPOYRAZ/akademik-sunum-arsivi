@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>DG Personel Kayıt</title>
+<style>
+  *{ box-sizing:border-box; font-family:Arial, sans-serif; }
+  body{ margin:0; background:#f2f4f8; }
+  .header{ background:#fff; padding:15px 30px; display:flex; align-items:center; gap:15px; border-bottom:1px solid #ddd; }
+  .logo{ width:46px; height:46px; border-radius:50%; background:#1f2a8a; color:#ffd400; display:flex; align-items:center; justify-content:center; font-weight:bold; }
+  .header h1{ margin:0; color:#1f2a8a; }
+  .page{ display:flex; height:calc(100vh - 80px); }
+  .visual-side{ width:60%; background:url("gorsel.png") center/cover no-repeat; }
+  .form-side{ width:50%; display:flex; justify-content:center; padding:20px; background:#e9edff; }
+  .form-box{ background:#4b5ee6; color:#fff; width:100%; max-width:780px; padding:15px; border-radius:12px; }
+  .grid{ display:grid; grid-template-columns:260px 1fr; gap:25px; }
+  .photo-box{ display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .photo-circle{ width:220px; height:220px; border:4px solid #fff; border-radius:50%; overflow:hidden; position:relative; display:flex; align-items:center; justify-content:center; background:#4b5ee6; margin:20px 0; }
+  #avatarPreview{ width:100%; height:100%; border-radius:50%; object-fit:cover; display:none; }
+  #avatarYazi{ position:absolute; color:#fff; }
+  .file-row{ display:flex; align-items:center; gap:12px; }
+  .file-btn{ background:#fff; color:#1f2a8a; padding:6px 12px; border-radius:4px; cursor:pointer; font-weight:600; }
+  #dosyaAdi{ font-size:14px; opacity:.9; max-width:140px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  input, select{ width:100%; padding:10px; border:none; border-radius:5px; margin-bottom:12px; }
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .email-row{ display:grid; grid-template-columns:1fr 140px; gap:10px; }
+  .actions{ margin-top:15px; position: relative; }
+  .sonuc-mesaj{ display: none; color: #fff; font-weight: 300; margin-bottom: 5px; }
+  .yeni-kayit-yazi{ display: block; font-size: 11px; opacity: 0.8; margin-top: 5px; }
+  button{ padding:10px 50px; background:#1f2a8a; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight: bold; }
+  button:hover{ background:#162070; }
+  input[type="file"] { display: none; }
+/* Bu kodları sayfanın en üstündeki <style> içine yapıştır */
+.gender-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* genderi sola dayar */
+  margin-top: 15px;
+  padding-left: 0px; /* Varsa burayı 0 yapın */
+  margin-left: -130px /* Dosya seç butonuyla aynı hizaya getirir */
+}
+
+#gender {
+  width: 100px; /* Dosya Seç butonuyla aynı genişlik */
+  padding: 6px;
+  border-radius: 5px;
+  border: none;
+  background: white;
+  margin-top: 5px;
+}
+
+.gender-container label {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">DG</div>
+  <h1>DG Personel Kayıt</h1>
+</div>
+
+<div class="page">
+  <div class="visual-side"></div>
+  <div class="form-side">
+    <form id="kayitForm" class="form-box">
+      <div class="grid">
+        <div class="photo-box">
+          <h3>Personel Fotoğrafı</h3>
+          <div class="photo-circle">
+            <span id="avatarYazi">Fotoğraf</span>
+            <img id="avatarPreview">
+          </div>
+          <div class="file-row">
+            <label for="avatarInput" class="file-btn">Dosya Seç</label>
+            <input type="file" id="avatarInput" accept="image/*" onchange="previewImage(this)">
+            <span id="dosyaAdi">Seçilen dosya yok</span>
+          </div>
+         <div class="gender-container">                   
+           <label>Cinsiyet</label>
+            <select id="gender">
+              <option value="">Seçiniz</option>
+              <option value="Kadın">Kadın</option>
+              <option value="Erkek">Erkek</option>
+              <option value="Yok">Yok</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label>Ad Soyad</label>
+          <input id="full_name" required placeholder="Ad Soyad">
+          <label>Telefon</label>
+          <input id="telefon" placeholder="05xx xxx xx xx" required>
+          <div class="row">
+            <div><label>Doğum Tarihi</label><input type="date" id="birth_date" required></div>
+            <div><label>Kayıt Tarihi</label><input type="date" id="kayitTarihi" required></div>
+          </div>
+          <label>E-posta</label>
+          <div class="email-row">
+            <input id="emailKullanici" placeholder="kullaniciadi" required>
+            <select id="emailUzanti">
+              <option value="@gmail.com">@gmail.com</option>
+              <option value="@bakircay.edu.tr">@bakircay.edu.tr</option>
+              <option value="@outlook.com">@outlook.com</option>
+           </select>
+          </div>
+          <div class="row">
+            <div>
+              <label>Departman</label>
+              <select id="departman"><option value="IT">IT</option><option value="BT">BT</option></select>
+            </div>
+            <div>
+              <label>Görev</label>
+              <select id="gorev"><option value="Uzman">Uzman</option><option value="Stajyer">Stajyer</option></select>
+            </div>
+          </div>
+          <div class="actions">
+            <div id="sonucMesaj" class="sonuc-mesaj">Kayıt başarı ile gerçekleştirilmiştir ✓</div>
+            <button type="button" id="kayitBtn" onclick="kaydet()">Kayıt</button>
+            <div id="yeniKayitYazi" class="yeni-kayit-yazi">Yeni kayıt için "Kayıt" a tıklayınız</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+  const supabaseUrl = "https://nhrzwzmgvocakejucuwi.supabase.co";
+  const supabaseKey = "sb_publishable_iFQm0tKgFg9EBMYzyesCrA_5ut6naR3";
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+  // Görsel Önizleme Fonksiyonu
+  function previewImage(input) {
+    const preview = document.getElementById("avatarPreview");
+    const yazi = document.getElementById("avatarYazi");
+    const dosyaAdi = document.getElementById("dosyaAdi");
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+        yazi.style.display = "none";
+      };
+      reader.readAsDataURL(input.files[0]);
+      dosyaAdi.textContent = input.files[0].name;
+    }
+  }
+
+  // Cloudinary Yükleme
+  async function uploadAvatarToCloudinary() {
+    const input = document.getElementById("avatarInput");
+    if (!input.files || input.files.length === 0) { alert("Lütfen fotoğraf seçin"); return null; }
+    const formData = new FormData();
+    formData.append("file", input.files[0]);
+    formData.append("folder", "Avatar");
+    formData.append("upload_preset", "Avatar");
+    const res = await fetch("https://api.cloudinary.com/v1_1/dtivezty8/image/upload", { method: "POST", body: formData });
+    if (!res.ok) { alert("Yükleme hatası"); return null; }
+    const data = await res.json();
+    return data.secure_url;
+  }
+
+  // Ana Kayıt Fonksiyonu
+  async function kaydet() {
+    const sonuc = document.getElementById("sonucMesaj");
+    const yeniYazi = document.getElementById("yeniKayitYazi");
+    const form = document.getElementById("kayitForm");
+
+    if (sonuc.style.display === "block") {
+      form.reset();
+      document.getElementById("avatarPreview").style.display = "none";
+      document.getElementById("avatarYazi").style.display = "block";
+      document.getElementById("dosyaAdi").textContent = "Seçilen dosya yok";
+      sonuc.style.display = "none";
+      yeniYazi.style.display = "none";
+      return;
+    }
+
+    const full_name = document.getElementById("full_name").value;
+    const email = document.getElementById("emailKullanici").value + document.getElementById("emailUzanti").value;
+
+    const avatar_url = await uploadAvatarToCloudinary();
+    if (!avatar_url) return;
+
+    
+
+    if (error) { alert("Hata: " + error.message); } 
+    else { sonuc.style.display = "block"; yeniYazi.style.display = "block"; }
+  }
+// --- TELEFON FORMATLAMA SCRIPT'I ---
+const telefonInput = document.getElementById("telefon");
+
+telefonInput.addEventListener("input", () => {
+  let digits = telefonInput.value.replace(/\D/g, "");
+
+  // +90 ile girilirse temizle
+  if (digits.startsWith("90")) {
+    digits = digits.slice(2);
+  }
+
+  // Başta 0 varsa temizle
+  if (digits.startsWith("0")) {
+    digits = digits.slice(1);
+  }
+
+  digits = digits.slice(0, 10);
+  let formatted = "";
+
+  if (digits.length > 0) formatted = "0" + digits.slice(0, 3);
+  if (digits.length >= 4) formatted += " " + digits.slice(3, 6);
+  if (digits.length >= 7) formatted += " " + digits.slice(6, 8);
+  if (digits.length >= 9) formatted += " " + digits.slice(8, 10);
+
+  telefonInput.value = formatted;
+});
+// -----------------------------------
+
+const adSoyadInput = document.getElementById("full_name");
+
+if (adSoyadInput) {
+  adSoyadInput.addEventListener("blur", () => {
+    let value = adSoyadInput.value.trim();
+    if (!value) return;
+
+    const parts = value.split(/\s+/);
+    if (parts.length > 0) {
+      // İlk kelimeyi (Ad) baş harfi büyük yap
+      const ad = parts[0].charAt(0).toUpperCase() + parts[0].slice(1).toLowerCase();
+      
+      // Geri kalanları (Soyad) tamamen büyük harf yap
+      const soyad = parts.slice(1).join(" ").toUpperCase();
+
+      adSoyadInput.value = soyad ? `${ad} ${soyad}` : ad;
+    }
+  });
+}
+// Fotoğrafı Cloudinary'ye yükler ve linkini döner
+async function uploadAvatarToCloudinary() {
+  const input = document.getElementById("avatarInput");
+  if (!input.files || input.files.length === 0) return null;
+
+  const formData = new FormData();
+  formData.append("file", input.files[0]);
+  formData.append("upload_preset", "Avatar"); // Cloudinary ayarın
+
+  const res = await fetch("https://api.cloudinary.com/v1_1/dtivezty8/image/upload", {
+    method: "POST",
+    body: formData
+  });
+  
+  const data = await res.json();
+  return data.secure_url; // Fotoğrafın internet linki
+}
+
+// Tüm verileri Supabase'e kaydeder
+async function kaydet() {
+  const avatar_url = await uploadAvatarToCloudinary();
+  if (!avatar_url) { alert("Lütfen fotoğraf seçin!"); return; }
+
+  const email = document.getElementById("emailKullanici").value + document.getElementById("emailUzanti").value;
+
+  const { error } = await supabaseClient.from("employees").insert([{
+    full_name: document.getElementById("full_name").value,
+    birth_date: document.getElementById("birth_date").value,
+    avatar_url: avatar_url, // Cloudinary linki buraya gidiyor
+    gender: document.getElementById("gender").value,
+    email: email, // Birleşmiş e-posta
+    mail_gonderildi: false
+  }]);
+
+  
+// image_42a196.png dosyasındaki ilgili kısım:
+if (!error) { 
+    document.getElementById("sonucMesaj").style.display = "block"; 
+  }
+}
+</script>
+
+</body>
+</html>
