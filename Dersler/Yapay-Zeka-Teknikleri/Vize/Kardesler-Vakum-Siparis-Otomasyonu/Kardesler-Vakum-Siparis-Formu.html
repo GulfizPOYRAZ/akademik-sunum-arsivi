@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Kardeşler Vakum</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 40px 20px;
+}
+.header img { width: 160px; }
+.header h2 { font-size: 34px; margin-top: 15px; }
+.header p { color: #555; font-size: 18px; }
+
+/* MAIN */
+.main {
+  display: flex;
+  align-items: flex-start;
+  padding: 25px;
+  gap: 30px;
+}
+
+/* PRODUCTS */
+.products {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card h3 { margin-top: 10px; font-size: 18px; }
+.card p { font-size: 14px; color: #444; }
+
+/* MESSAGE BOX */
+.msgbox {
+  width: 310px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  position: sticky;
+  top: 20px;
+}
+.msgbox input,
+.msgbox textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+}
+.msgbox button {
+  width: 100%;
+  background: #2b7a3d;
+  border: none;
+  padding: 12px;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.msgbox button:hover { background: #226331; }
+
+.msg-info {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+#result {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  display: none;
+  font-weight: bold;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <img src="logo.png">
+  <h2>Kardeşler Vakum</h2>
+  <p>Tarım ve endüstri çözümleri</p>
+</div>
+
+<div style="background:#175872;color:white;padding:15px;margin:20px 0;border-radius:10px;font-size:16px;">
+📩 <b>Bize Ulaşın:</b> info@kardeslervakum.com  
+<br>📞 0 (555) 555 55 55
+<br><span style="opacity:0.8">Sipariş ve teknik destek için 7/24 yanıt veriyoruz.</span>
+</div>
+
+<div class="main">
+
+  <!-- ÜRÜNLER -->
+  <div class="products">
+
+    <div class="card">
+      <img src="1.png">
+      <h3>Gölgelik Çadır (KV-001)</h3>
+      <p>Hayvan barınaklarında maksimum koruma sağlar.</p>
+    </div>
+
+    <div class="card">
+      <img src="2.png">
+      <h3>Gölgeleme Filesi (KV-002)</h3>
+      <p>Seralarda ışık kontrolü ve koruma sağlar.</p>
+    </div>
+
+    <div class="card">
+      <img src="3.png">
+      <h3>Dikey Tarım Sistemi (KV-003)</h3>
+      <p>Modern tarım için yüksek verim sunar.</p>
+    </div>
+
+    <div class="card">
+      <img src="4.png">
+      <h3>Çim Örtüsü (KV-004)</h3>
+      <p>Yabani ot oluşumunu engeller.</p>
+    </div>
+
+    <div class="card">
+      <img src="7.png">
+      <h3>Çilek Örtüsü (KV-005)</h3>
+      <p>Verimliliği artıran koruyucu örtü.</p>
+    </div>
+
+    <div class="card">
+      <img src="8.png">
+      <h3>Takviyeli Hortum (KV-006)</h3>
+      <p>Dayanıklı sulama hortumu.</p>
+    </div>
+
+    <div class="card">
+      <img src="5.png">
+      <h3>Akıllı Tarım Robotu (KV-007)</h3>
+      <p>Otomasyon, ölçüm ve analiz sistemi.</p>
+    </div>
+
+    <div class="card">
+      <img src="6.png">
+      <h3>Tünel Sera (KV-008)</h3>
+      <p>Ekonomik ve uzun ömürlü sera çözümü.</p>
+    </div>
+
+  </div>
+
+  <!-- MESAJ KUTUSU -->
+  <div class="msgbox">
+    <h2>Mesaj Gönder</h2>
+
+    <!-- ✔✔✔ BAŞARI MESAJI KUTUSU BURAYA EKLENDİ -->
+    <div id="bildirim" style="
+      display:none;
+      padding:15px;
+      border-radius:8px;
+      margin-bottom:20px;
+      font-size:16px;
+      font-weight:600;">
+    </div>
+
+    <div id="result"></div>
+
+    <p class="msg-info">
+      Lütfen aşağıdaki formu eksiksiz doldurunuz.
+    </p>
+
+    <form id="siparisForm">
+
+      <label>Müşteri Adı-Soyadı</label>
+      <input type="text" name="Musteri" required>
+
+      <label>Telefon</label>
+      <input type="tel" id="telefon" name="telefon" maxlength="15" placeholder="(5__) ___ __ __" required>
+
+      <label>E-mail</label>
+      <input type="email" id="email" name="email" placeholder="ornek@mail.com" required>
+
+      <label>Ürün Kodu</label>
+      <input type="text" id="kod" name="kod" maxlength="6" placeholder="KV-001" required>
+
+      <label>Miktar</label>
+      <input type="number" name="miktar" min="1" required>
+
+      <label>Mesaj</label>
+      <textarea id="mesaj" name="mesaj" rows="6"></textarea>
+
+      <button type="submit">Gönder</button>
+
+    </form>
+  </div>
+</div>
+
+<script>
+/* 📌 Telefon Maskesi */
+document.getElementById("telefon").addEventListener("input", function (e) {
+    let v = e.target.value.replace(/\D/g, "").slice(0, 10);
+    let out = "";
+    if (v.length > 0) out = "(" + v.slice(0,3);
+    if (v.length >= 4) out += ") " + v.slice(3,6);
+    if (v.length >= 7) out += " " + v.slice(6,8);
+    if (v.length >= 9) out += " " + v.slice(8,10);
+    e.target.value = out;
+});
+
+/* 📌 ÜRÜN KODU: KV-001 … KV-008 */
+const kodInput = document.getElementById("kod");
+
+kodInput.addEventListener("input", function(e) {
+    let num = e.target.value.replace(/\D/g, "").slice(0, 3);
+
+    if (!num) {
+        e.target.value = "KV-";
+        return;
+    }
+
+    let val = parseInt(num);
+
+    if (val > 8) {
+        e.target.value = "KV-";
+        alert("KV-008 üzeri ürün bulunmamaktadır.");
+        return;
+    }
+
+    e.target.value = "KV-" + num.padStart(3, "0");
+});
+
+kodInput.addEventListener("focus", function () {
+    if (kodInput.value.trim() === "") kodInput.value = "KV-";
+});
+
+/* 📌 Form Gönderme */
+document.getElementById("siparisForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const bildirim = document.getElementById("bildirim");
+    const formData = new FormData(e.target);
+
+    try {
+        const res = await fetch("http://localhost:5678/webhook-test/Siparis", {
+            method: "POST",
+            body: formData
+        });
+
+        if (res.ok) {
+            bildirim.style.display = "block";
+            bildirim.style.background = "#d4edda";
+            bildirim.style.color = "#155724";
+            bildirim.innerHTML = "✔ Siparişiniz başarıyla alınmıştır!";
+            e.target.reset();
+        } else {
+            bildirim.style.display = "block";
+            bildirim.style.background = "#ffd5d5";
+            bildirim.style.color = "#8b0000";
+            bildirim.innerHTML = "❌ Gönderim sırasında bir hata oluştu.";
+        }
+                      
+    } catch (err) {
+        bildirim.style.display = "block";
+        bildirim.style.background = "#ffd5d5";
+        bildirim.style.color = "#8b0000";
+        bildirim.innerHTML = "❌ Bağlantı hatası!";
+    }
+});
+</script>
+
+</body>
+</html>

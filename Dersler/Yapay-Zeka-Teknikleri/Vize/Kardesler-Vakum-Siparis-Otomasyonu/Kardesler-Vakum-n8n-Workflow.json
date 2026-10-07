@@ -1,0 +1,1401 @@
+{
+  "name": "KARDEŞLER VAKUM",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Siparis",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -5632,
+        -1120
+      ],
+      "id": "d2701cf8-b758-4092-b9a9-e106d13e3d6f",
+      "name": "Webhook",
+      "webhookId": "6243a946-1910-4527-97ac-009781b7e335"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e8e959aa-ef94-4b36-a5e8-e6bb557b782e",
+              "name": "Siparis",
+              "value": "={{ $json.SiparisNo }}",
+              "type": "string"
+            },
+            {
+              "id": "07d5f672-ef52-471e-ba13-835d89a8e46e",
+              "name": "Musteri",
+              "value": "={{ $json.Musteri }}",
+              "type": "string"
+            },
+            {
+              "id": "029093ba-8341-4e82-ae9d-786873165ce1",
+              "name": "Telefon",
+              "value": "={{ $json.Telefon }}",
+              "type": "string"
+            },
+            {
+              "id": "908519da-f753-4e20-9d4b-1d231a2fc7a9",
+              "name": "E-mail",
+              "value": "={{ $json['E-mail'] }}",
+              "type": "string"
+            },
+            {
+              "id": "e516d2fe-5185-4cfc-8772-791ca3c8e702",
+              "name": "Urun",
+              "value": "={{ $json.Urun }}",
+              "type": "string"
+            },
+            {
+              "id": "8ea3ba88-f90d-4b04-a1ac-a85f4c104961",
+              "name": "Miktar",
+              "value": "={{ $json.Miktar }}",
+              "type": "string"
+            },
+            {
+              "id": "cb9b555d-6bb4-460d-80c1-782bea88a805",
+              "name": "Tarih",
+              "value": "={{ $json.Tarih }}",
+              "type": "string"
+            },
+            {
+              "id": "ef8d778d-7111-43ab-b54e-d953061a1dab",
+              "name": "Saat",
+              "value": "={{ $json.Saat }}",
+              "type": "string"
+            },
+            {
+              "id": "810a9c78-f22d-4860-8056-e51a5195ee4b",
+              "name": "mesaj",
+              "value": "={{ $json.mesaj }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -5328,
+        -1120
+      ],
+      "id": "b95cc0a7-93c1-4f1d-aa21-b44af89eb3c9",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1ryK4DWsPIYil3eGoKB1qHvD9Ba0ECydKfSUNejGhrVY",
+          "mode": "list",
+          "cachedResultName": "KardeslerVakum-siparisler",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ryK4DWsPIYil3eGoKB1qHvD9Ba0ECydKfSUNejGhrVY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sayfa1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ryK4DWsPIYil3eGoKB1qHvD9Ba0ECydKfSUNejGhrVY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "Miktar": "{{$json[\"Miktar\"]}}"
+          },
+          "matchingColumns": [
+            "Siparis No"
+          ],
+          "schema": [
+            {
+              "id": "Siparis No",
+              "displayName": "Siparis No",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Musteri",
+              "displayName": "Musteri",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Telefon",
+              "displayName": "Telefon",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Urun",
+              "displayName": "Urun",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Miktar",
+              "displayName": "Miktar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tarih",
+              "displayName": "Tarih",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Saat",
+              "displayName": "Saat",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Sipariş Maili",
+              "displayName": "Sipariş Maili",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Durum ",
+              "displayName": "Durum ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Durum Maili",
+              "displayName": "Durum Maili",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Kargo Durumu",
+              "displayName": "Kargo Durumu",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Kargo Maili",
+              "displayName": "Kargo Maili",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hata Mesajı",
+              "displayName": "Hata Mesajı",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -4528,
+        -1264
+      ],
+      "id": "906bd203-8c68-41b7-9bbd-83684a283966",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1sj7g8FlRCJ3RGym",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\n\n// Zaman bilgileri\nconst now = new Date();\n\nconst tarih =\n  now.getFullYear() +\n  \"-\" +\n  String(now.getMonth() + 1).padStart(2, \"0\") +\n  \"-\" +\n  String(now.getDate()).padStart(2, \"0\");\n\nconst saat =\n  String(now.getHours()).padStart(2, \"0\") +\n  \":\" +\n  String(now.getMinutes()).padStart(2, \"0\");\n\n// Sipariş numarası: GGAAYYYY-HHMMSS-random\nconst siparisNo =\n  String(now.getDate()).padStart(2, \"0\") +\n  String(now.getMonth() + 1).padStart(2, \"0\") +\n  String(now.getFullYear()) +\n  \"-\" +\n  String(now.getHours()).padStart(2, \"0\") +\n  String(now.getMinutes()).padStart(2, \"0\") +\n  String(now.getSeconds()).padStart(2, \"0\") +\n  \"-\" +\n  Math.floor(Math.random() * 900 + 100);\n\n// Temiz JSON\nconst cleaned = {\n  Musteri: $input.first().json.body.Musteri || \"\",\n  Telefon: $input.first().json.body.telefon || \"\",\n  \"E-mail\": $input.first().json.body.email || \"\",\n  Urun: $input.first().json.body.kod || \"\",\n  Miktar: $input.first().json.body.miktar || \"\",\n  mesaj: $input.first().json.body.mesaj || \"\",\n  Tarih: tarih,\n  Saat: saat,\n  SiparisNo: siparisNo\n};\n\nreturn [\n  {\n    json: cleaned\n  }\n];\n\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -5488,
+        -1120
+      ],
+      "id": "e16d051a-a2e4-4d63-899d-91874bbd6013",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "34737e7e-7781-4634-9cf2-eff85e81558d",
+              "leftValue": "={{ $json.userMessage.Miktar }}",
+              "rightValue": "=1",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -4976,
+        -1120
+      ],
+      "id": "45231931-0ea8-4b13-9d82-7dbbf66d5952",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "58e8e3fe-8fa0-465a-8d2d-c623a79b67a3",
+              "name": "Siparis No",
+              "value": "={{ $json.userMessage.Siparis }}",
+              "type": "string"
+            },
+            {
+              "id": "34d54ffd-c583-44fb-a2e9-8acaf6015d25",
+              "name": "Musteri",
+              "value": "={{ $('Edit Fields').item.json.Musteri }}",
+              "type": "string"
+            },
+            {
+              "id": "3105f859-6e98-49a3-bcb2-05f39af89a3e",
+              "name": "Telefon",
+              "value": "={{ $('Edit Fields').item.json.Telefon }}",
+              "type": "string"
+            },
+            {
+              "id": "9c23cae4-47fe-4f22-820f-5c1df71e1673",
+              "name": "E-mail",
+              "value": "={{ $('Edit Fields').item.json['E-mail'] }}",
+              "type": "string"
+            },
+            {
+              "id": "a8c9d1db-0f12-4712-874b-f002736f9972",
+              "name": "Urun",
+              "value": "={{ $('Edit Fields').item.json.Urun }}",
+              "type": "string"
+            },
+            {
+              "id": "a93348bc-196d-42e8-b800-d5f22065468f",
+              "name": "Miktar",
+              "value": "={{ $json.userMessage.Miktar }}",
+              "type": "string"
+            },
+            {
+              "id": "2025440b-b6dc-4ccb-ac6d-2c5291e832df",
+              "name": "Tarih",
+              "value": "={{ $('Edit Fields').item.json.Tarih }}",
+              "type": "string"
+            },
+            {
+              "id": "6f4c5dd0-7d45-45df-a2d4-9f167897ecc7",
+              "name": "Saat",
+              "value": "={{ $('Edit Fields').item.json.Saat }}",
+              "type": "string"
+            },
+            {
+              "id": "1953584c-9696-4e45-a3a8-bc0fa2b19b45",
+              "name": "Hata Mesajı",
+              "value": "={{ $json.userMessage.mesaj }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4736,
+        -1008
+      ],
+      "id": "08e7a6a6-4412-4099-928b-75a5c8f28d18",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "19SbsPLWvkNLy6hZzmHFLLnaxsKwmlYlOLpZxX2Prxgg",
+          "mode": "list",
+          "cachedResultName": "Hatalı Sipariş",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19SbsPLWvkNLy6hZzmHFLLnaxsKwmlYlOLpZxX2Prxgg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sayfa1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19SbsPLWvkNLy6hZzmHFLLnaxsKwmlYlOLpZxX2Prxgg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "Tarih": "{{$json[\"Tarih\"]}}",
+            "Saat": "{{$json[\"Saat\"]}}"
+          },
+          "matchingColumns": [
+            "Siparis No"
+          ],
+          "schema": [
+            {
+              "id": "Siparis No",
+              "displayName": "Siparis No",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Musteri",
+              "displayName": "Musteri",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Telefon",
+              "displayName": "Telefon",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Urun",
+              "displayName": "Urun",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Miktar",
+              "displayName": "Miktar",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tarih",
+              "displayName": "Tarih",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Saat",
+              "displayName": "Saat",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hata Mesajı",
+              "displayName": "Hata Mesajı",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Sipariş Maili",
+              "displayName": "Sipariş Maili",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Firma Yanıtı",
+              "displayName": "Firma Yanıtı",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "threadId",
+              "displayName": "threadId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "labelIds",
+              "displayName": "labelIds",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -4528,
+        -1024
+      ],
+      "id": "959cec41-5048-4aa3-b7a2-2ae9f365f95a",
+      "name": "Append or update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1sj7g8FlRCJ3RGym",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "613c9b9c-08d3-4c19-bbb8-88a126db9d0e",
+              "name": "Siparis No",
+              "value": "={{ $('Context Init').item.json.userMessage.Siparis }}",
+              "type": "string"
+            },
+            {
+              "id": "8dc6c0aa-3dac-4cbb-bf07-ffceef504921",
+              "name": "Musteri",
+              "value": "={{ $('Edit Fields').item.json.Musteri }}",
+              "type": "string"
+            },
+            {
+              "id": "149c36e6-d698-4ce1-aa87-1da1900aeba1",
+              "name": "Telefon",
+              "value": "={{ $('Webhook').item.json.body.telefon }}",
+              "type": "string"
+            },
+            {
+              "id": "e33c1fc5-9405-41a0-a9ec-322692b41fcd",
+              "name": "E-mail",
+              "value": "={{ $('Webhook').item.json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "7ae6ce53-de3f-4dd5-8552-c61efe15197c",
+              "name": "Urun",
+              "value": "={{ $json.userMessage.Urun }}",
+              "type": "string"
+            },
+            {
+              "id": "646a9a63-712a-4389-99dd-8bdb47d98115",
+              "name": "Miktar",
+              "value": "={{ $json.userMessage.Miktar }}",
+              "type": "string"
+            },
+            {
+              "id": "c21fe77c-aa65-4ff4-afa0-456551c21c9b",
+              "name": "Tarih",
+              "value": "={{ $json.userMessage.Tarih }}",
+              "type": "string"
+            },
+            {
+              "id": "8d1c415c-6798-492a-8551-dd80b0e70bdc",
+              "name": "Saat",
+              "value": "={{ $json.userMessage.Saat }}",
+              "type": "string"
+            },
+            {
+              "id": "69998140-acc7-4527-ba2f-97b950d60c86",
+              "name": "Hata Mesajı",
+              "value": "={{$json[\"Mesaj\"] ?? \"\"}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -4752,
+        -1264
+      ],
+      "id": "4434b74f-26f5-4f0b-b21d-d1da411d6039",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "sendTo": "gpoyraz3335@gmail.com",
+        "subject": "=Müşteri Hatalı Sipariş maili – {{ $json['Siparis No'] }}",
+        "message": "=<div style=\"font-family: Arial, sans-serif; padding: 20px; color:#333; line-height: 1.6;\">    <h2 style=\"color:#d9534f; margin-bottom: 10px;\">     ❗ Hatalı Sipariş Bilgisi   </h2>    <p>Merhaba <b>{{ $json.Musteri }}</b>,</p>    <p>     Gönderdiğiniz siparişte bazı eksik veya hatalı bilgiler tespit edildi.       Siparişiniz şu anda <b style=\"color:#d9534f;\">işleme alınamamıştır.</b>   </p>    <table style=\"border-collapse: collapse; width: 100%; margin-top: 15px;\">       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Sipariş No</td>           <td style=\"padding: 8px; border:1px solid #ddd;\"><b>  {{ $json['Siparis No'] }} </b></td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Müşteri</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json[\"Musteri\"] }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Telefon</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json[\"Telefon\"] }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">E-mail</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">  {{ $json['E-mail'] }}  </td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Ürün</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json[\"Urun\"] }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Miktar</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json[\"Miktar\"] }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Tarih – Saat</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json[\"Tarih\"] }} – {{ $json[\"Saat\"] }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Hata Mesajı</td>           <td style=\"padding: 8px; border:1px solid #ddd; color:#d9534f;\">             <b>  {{ $json['Hata Mesajı'] }} </b>           </td>       </tr>   </table>    <p style=\"margin-top: 20px;\">     Lütfen hatalı alanları kontrol ederek bize doğru bilgiyi tekrar iletiniz.       Gerekli düzeltmeyi sağladıktan sonra siparişiniz işleme alınacaktır.   </p>    <p style=\"font-size: 14px; color:#888; margin-top: 15px;\">     Bu e-posta otomatik olarak oluşturulmuştur.       Yanıtlamak isterseniz bu mail adresini kullanabilirsiniz.   </p>  </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -4464,
+        -816
+      ],
+      "id": "24abf0e9-2bfd-4386-912c-d8c2b8e644c3",
+      "name": "Müşteri Hatalı mesaj",
+      "webhookId": "fbb5bec6-acc8-423d-b9de-0c2a33f8520a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pRZ5DarIE86nSmDT",
+          "name": "Gmail.benim"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "gpoyraz3335@gmail.com",
+        "subject": "Firma doğru sipariş maili",
+        "message": "=<div style=\"font-family: Arial, sans-serif; padding: 20px; color:#333; line-height: 1.6;\">   <h2 style=\"color:#1d72b8;\">Yeni Sipariş Doğrulandı</h2>    <p><b>Yeni bir sipariş başarıyla alındı ve doğrulandı.</b></p>    <table style=\"border-collapse: collapse; width: 100%; margin-top: 15px;\">     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Sipariş No</td>       <td style=\"border:1px solid #ddd; padding:8px;\"><b>{{ $json.SiparisNo }}</b></td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Müşteri</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Musteri }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Telefon</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Telefon }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">E-mail</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Email }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Ürün</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Urun }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Miktar</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Miktar }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Tarih – Saat</td>       <td style=\"border:1px solid #ddd; padding:8px;\">         {{ $json.Tarih }} – {{ $json.Saat }}       </td>     </tr>   </table>    <p style=\"margin-top:20px;\">     Bu sipariş <b>hazırlanmaya uygundur.</b>       Lütfen üretim ve paketleme sürecini başlatınız.   </p>    <p style=\"font-size: 14px; color:#888; margin-top:10px;\">     Bu e-posta sistem tarafından otomatik olarak oluşturulmuştur.   </p> </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -4368,
+        -1264
+      ],
+      "id": "ccd9bcc6-952f-4db2-858e-3c614820d032",
+      "name": "Firma Doğru Sipariş Maili",
+      "webhookId": "b18aab88-430e-4ffd-a913-a083a383d346",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pRZ5DarIE86nSmDT",
+          "name": "Gmail.benim"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "gpoyraz3335@gmail.com",
+        "subject": "Doğru  sipariş maili",
+        "message": "=<div style=\"font-family: Arial, sans-serif; padding: 20px; color:#333; line-height: 1.6;\">    <h2 style=\"color:#1d72b8; margin-bottom: 10px;\">Siparişiniz Başarıyla Alındı</h2>    <p>Merhaba <b>{{ $json.Musteri }}</b>,</p>    <p>     Siparişiniz başarıyla oluşturulmuştur. Aşağıda sipariş detaylarınızı bulabilirsiniz:   </p>    <table style=\"border-collapse: collapse; width: 100%; margin-top: 15px;\">     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Sipariş No</td>       <td style=\"border:1px solid #ddd; padding:8px;\"><b>{{ $json[\"Siparis No\"] }}</b></td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Müşteri</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Musteri }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Telefon</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Telefon }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">E-mail</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Email }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Ürün</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Urun }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Miktar</td>       <td style=\"border:1px solid #ddd; padding:8px;\">{{ $json.Miktar }}</td>     </tr>     <tr>       <td style=\"border:1px solid #ddd; padding:8px;\">Tarih – Saat</td>       <td style=\"border:1px solid #ddd; padding:8px;\">         {{ $json.Tarih }} – {{ $json.Saat }}       </td>     </tr>   </table>    <p style=\"margin-top: 20px;\">     Siparişiniz işleme alınmıştır. Hazırlık aşamalarını tamamladıkça ayrıca bilgilendirme maili gönderilecektir.   </p>    <p style=\"font-size: 14px; color:#888;\">     Bu e-posta otomatik olarak oluşturulmuştur. Lütfen bu mesaja cevap vermeyiniz.   </p>  </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -4480,
+        -1424
+      ],
+      "id": "816076ed-88d9-42bb-a7c9-273c90e6f497",
+      "name": "Müşteri Doğru Sipariş Maili",
+      "webhookId": "a361632f-b295-4d00-9e9f-67663e2c2339",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pRZ5DarIE86nSmDT",
+          "name": "Gmail.benim"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "gpoyraz3335@gmail.com",
+        "subject": "Firma hatalı sipariş maili",
+        "message": "=<div style=\"font-family: Arial, sans-serif; padding: 20px; color:#333; line-height: 1.6;\">    <h2 style=\"color:#d9534f; margin-bottom: 10px;\">     ❗ Hatalı Sipariş Tespit Edildi   </h2>    <p><b>Bir sipariş işleme alınamadı.</b></p>   <p>Aşağıdaki sipariş hatalı bilgiler içeriyor ve kontrol gerektiriyor:</p>    <table style=\"border-collapse: collapse; width: 100%; margin-top: 15px;\">       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Sipariş No</td>           <td style=\"padding: 8px; border:1px solid #ddd;\"><b>{{ $json['Siparis No'] }} </b></td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Müşteri</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json.Musteri }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Telefon</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json.Telefon }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">E-mail</td>           <td style=\"padding: 8px; border:1px solid #ddd;\"> {{ $json['E-mail'] }} </td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Ürün</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json.Urun }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Miktar</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">   {{ $json.Miktar }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Tarih – Saat</td>           <td style=\"padding: 8px; border:1px solid #ddd;\">{{ $json.Tarih }} – {{ $json.Saat }}</td>       </tr>       <tr>           <td style=\"padding: 8px; border:1px solid #ddd;\">Hata Mesajı</td>           <td style=\"padding: 8px; border:1px solid #ddd; color:#d9534f;\">             <b> {{ $json['Hata Mesajı'] }} </b>           </td>       </tr>   </table>    <p style=\"margin-top: 20px;\">     Lütfen sipariş verisini kontrol ederek müşteriden yeniden bilgi talep ediniz.       Hatalı alan düzeltilmeden bu sipariş işleme alınamaz.   </p>    <p style=\"font-size: 14px; color:#888; margin-top: 15px;\">     Bu e-posta otomatik olarak oluşturulmuştur.   </p>  </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -4336,
+        -1024
+      ],
+      "id": "feae53ce-2c76-45cf-921c-3df398cf70cf",
+      "name": "Firma Hatalı Sipariş Maili",
+      "webhookId": "788afd40-57fd-4e81-8751-071f67bd7d1c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pRZ5DarIE86nSmDT",
+          "name": "Gmail.benim"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.tekSatir }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Sen Kardeşler Vakum için çalışan bir yapay zekâ sipariş doğrulama asistanısın.\n\nGörevin:\n- Kullanıcının gönderdiği sipariş bilgilerini kontrol etmek.\n- Eksik, hatalı veya yanlış formatlı alanları tespit etmek.\n- Sadece geçerli bir JSON nesnesi döndürmek.\n- JSON dışında hiçbir açıklama, sohbet, yorum veya ek metin yazmamak.\n\nZorunlu JSON formatı (sırası değişmeyecek):\n\n{\n  \"Musteri\": \"\",\n  \"Telefon\": \"\",\n  \"Email\": \"\",\n  \"Urun\": \"\",\n  \"Miktar\": \"\",\n  \"HataMesaji\": \"\",\n  \"MesajMetni\": \"\"\n}\n\nKurallar:\n1) ÇIKTI SADECE bu yapıda TEK bir JSON obje olacak. Başka hiçbir karakter olmayacak.\n2) Tüm alanlar her zaman dönecek.\n3) Hata varsa:\n   - \"HataMesaji\" kısa bir açıklama içerecek.\n   - \"MesajMetni\" boş \"\" olacak.\n4) Hata yoksa:\n   - \"HataMesaji\" boş \"\" olacak.\n   - \"MesajMetni\" müşteri için uygun bir onay mesajı içerecek.\n5) Kullanıcıdan gelen değerleri değiştirme (sadece doğrula).\n6) Ek alan ekleme, alan sırasını değiştirme yasak.\n7) Kod bloğu (```json veya ``` ) kullanma.\n8) Açıklama yazma.\n\nYalnızca geçerli JSON nesnesi döndür.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -6672,
+        -1120
+      ],
+      "id": "151ae613-3ae8-40ba-9f38-db2689b5f779",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "// İlk formdan gelen veriyi hafıza (context) için başlangıç olarak ayarlıyoruz\nreturn [\n  {\n    json: {\n      context: \"\",\n      userMessage: $json   // Formdan gelen tüm veriler\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -5168,
+        -1120
+      ],
+      "id": "520b3173-fcfc-454a-8527-859db09280a3",
+      "name": "Context Init"
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n\n  // 1) AI Agent çıktısı string formatında → JSON'a dönüştür\n  const raw = item.json.output;\n  const temizJSON = JSON.parse(raw);\n\n  // 2) Eski output’un yerine gerçek JSON'u yaz\n  item.json = temizJSON;\n}\n\nreturn $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6304,
+        -1264
+      ],
+      "id": "c64de83e-666b-4b48-9845-f227748cf3fc",
+      "name": "Context Update"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -6480,
+        -832
+      ],
+      "id": "00fddc28-1770-44d9-a0fc-32260a4b05eb",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "KJqSgtzYZWdZmxPm",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const line = \n  $input.first().json.Musteri + \" \" +\n   $input.first().json.Telefon+ \" \" +\n $input.first().json['E-mail']+ \" \" +\n  $input.first().json.Urun + \" \" +\n  $input.first().json.Miktar+ \" \" +\n  $input.first().json.Mesaj;\n\nreturn [\n  {\n    json: {\n      tekSatir: line\n    }\n  }\n];\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6848,
+        -1120
+      ],
+      "id": "0d41f09a-008d-4350-865c-f9d5b7caede9",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Tek satır veriyi al\nconst line = $json.tekSatir || \"\";\n\n// Boşluklara göre ayır\nconst parts = line.trim().split(/\\s+/);\n\n// Parçaları alana yerleştir\nconst result = {\n  Musteri: parts[0] || \"\",\n  Telefon: (parts[1] + \" \" + parts[2] + \" \" + parts[3] + \" \" + parts[4]) || \"\",\n  Email: parts[5] || \"\",\n  Urun: parts[6] || \"\",\n  Miktar: parts[7] || \"\",\n  mesaj: parts.slice(8).join(\" \") || \"\"   // geri kalanlar mesaj\n};\n\nreturn [\n  {\n    json: result\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6320,
+        -1120
+      ],
+      "id": "a384cfc7-74d6-4508-8acc-99ef123707d0",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"Musteri\": \"\",\n  \"Telefon\": \"\",\n  \"Email\": \"\",\n  \"Urun\": \"\",\n  \"Miktar\": \"\",\n  \"HataMesaji\": \"\",\n  \"MesajMetni\": \"\"\n}\n",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -6480,
+        -976
+      ],
+      "id": "28014213-382c-4bb9-84b8-e2cdf3324560",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -6752,
+        -960
+      ],
+      "id": "01ddee30-010f-46e3-8156-7bc993da934e",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "KJqSgtzYZWdZmxPm",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0fedd894-b866-4a9a-bf2b-fb881f554db5",
+              "name": "Musteri",
+              "value": "={{ $json.body.Musteri }}",
+              "type": "string"
+            },
+            {
+              "id": "f38adda4-d38c-45c5-901f-0ebfb8fcded7",
+              "name": "Telefon",
+              "value": "={{ $json.body.telefon }}",
+              "type": "string"
+            },
+            {
+              "id": "38a05569-64f7-4a73-8cb9-50cd73887118",
+              "name": "E-mail",
+              "value": "={{ $json.body['E-mail'] }}",
+              "type": "string"
+            },
+            {
+              "id": "d7160b85-614f-4496-bcdc-b85ad1ed5acb",
+              "name": "Urun",
+              "value": "={{ $json.body.kod }}",
+              "type": "string"
+            },
+            {
+              "id": "c4397272-1762-4143-b7a3-89c2ec132463",
+              "name": "Miktar",
+              "value": "={{ $json.body.miktar }}",
+              "type": "string"
+            },
+            {
+              "id": "0628b942-943e-420f-b548-abd8d9468ed7",
+              "name": "Mesaj",
+              "value": "={{ $json.body.mesaj }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -7056,
+        -1136
+      ],
+      "id": "90194c8c-05d5-42f7-b82f-902786bc1c3a",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.ChatInput }}\n",
+        "options": {
+          "systemMessage": "Sen Kardeşler Vakum için çalışan bir sipariş toplama ve sipariş tamamlama sohbet asistanısın.\nAmacın: Kullanıcıdan bir veya birden fazla ürün siparişi almak, siparişi doğru formatlarda toplamak, en sonunda sipariş özetini sunmak, onay aldıktan sonra siparişi tamamlamaktır.\n\n📦 SOHBET AKIŞ KURALLARI (ÜRÜN DÖNGÜSÜ + MÜŞTERİ BİLGİLERİ)\n\nSohbete her zaman şu soruyla başla:\n“Hangi ürünü istiyorsunuz? (KV-001–KV-008 arası ürün kodu)”\n\nKullanıcı ürün kodu yazınca sor:\n“Bu üründen kaç adet istiyorsunuz?”\n\nKullanıcı adet yazınca sor:\n“Başka ürün istiyor musunuz? (Evet / Hayır)”\n\nKullanıcı ‘Evet’ derse:\n– Sıfırdan başlama\n– Tekrar ürün sorusuna dön:\n“Hangi ürünü istiyorsunuz? (KV-001–KV-008 arası ürün kodu)”\n\nBu döngü kullanıcı “Hayır” diyene kadar devam edecek.\n\nKullanıcı ‘Hayır’ derse müşteri bilgilerine geç:\nSırayla sor:\n\nAd ve soyad\n\nTelefon numarası\n\nE-mail\n\nAdres\n\nTüm bilgiler tamamlanınca sipariş özetini oluştur:\n\n📦 Ürünler örnek format:\nKV-001 → 3 adet\nKV-005 → 2 adet\nKV-008 → 1 adet\n\n👤 Müşteri Bilgileri örnek format:\nAd Soyad: …\nTelefon: …\nE-mail: …\nAdres: …\n\nSonra sor:\n“Bu bilgiler doğru mu? Siparişi onaylıyor musunuz? (Evet / Hayır)”\n\nKullanıcı ‘Evet’ derse:\n“Teşekkürler. Siparişiniz onaylanmıştır. Ürünleriniz 3 gün içinde size ulaşacaktır. İyi günler dileriz.”\nVe bitti = true olarak dön.\n\nKullanıcı ‘Hayır’ derse:\n“Sipariş iptal edilmiştir. Yeni bir sipariş vermek isterseniz 'Yeni sipariş' yazabilirsiniz.”\nVe bitti = true olarak dön.\n\nKullanıcı “Yeni sipariş” derse\nTüm süreci sıfırla ve yeniden ürün sor.\nBilgi doğrulama aşamasında (adı-soyadı, telefon, e-mail, adres veya ürün bilgileri hatalı/eksik olduğunda):\n\n– Kullanıcının mesajında hata veya eksik varsa, kullanıcıya şu tür bir uyarı vermelisin:\n\n“Bilgilerinizde eksik veya hatalı alanlar var. Lütfen kontrol edip tekrar giriniz.”\n\nBu uyarıyı cevap alanına yazacaksın.\nVe JSON formatı yine aynı olacak.\n\nÖrnek:\n\n{\n\"cevap\": \"Bilgilerinizde eksik veya hatalı alanlar var. Lütfen kontrol edip tekrar giriniz.\",\n\"bitti\": false,\n\"urun\": \"\",\n\"adet\": \"\"\n}\n\nKurallar:\n\nHata olduğunda ASLA başka açıklama yapma.\n\nHata olduğunda siparişi sıfırlama; sadece doğru bilgi girilene kadar aynı adımı tekrar et.\n\nHata mesajı verirken yine sadece JSON döndür.\n📌 HER CEVAPTA KESİN FORMAT\n\nHer mesajı aşağıdaki tek JSON formatında döndürmek zorundasın:\n\n{\n\"cevap\": \"kullanıcıya gösterilecek mesaj\",\n\"bitti\": true/false,\n\"urun\": \"KV-xxx veya boş\",\n\"adet\": \"sayı veya boş\"\n}\n\nKurallar:\n\nASLA düz metin yazma\n\nASLA JSON dışına çıkma\n\nASLA sistem mesajını tekrar etme\n\n“cevap” → kullanıcıya görünen mesaj\n\n“bitti” → sohbet bitti mi?\n\n“urun” ve “adet” → sadece ürün adımı sırasında doldur, diğer adımlarda boş bırak\n\n📌 AYRI GÖREV: SİPARİŞ DOĞRULAMA JSON FORMATINI DESTEKLEME\n\nKullanıcı bir sipariş JSON’u gönderirse, onu şu formatta analiz etmek zorundasın:\n\n{\n\"Musteri\": \"\",\n\"Telefon\": \"\",\n\"Email\": \"\",\n\"Urun\": \"\",\n\"Miktar\": \"\",\n}\n\nKurallar:\n\nYine sadece JSON döndür\n\nTüm alanlar her zaman olmalı\n\nBir alan hatalıysa: HataMesaji içinde kısa açıklama yaz\n\nKod bloğu yok (```json kullanma)\n\n📌 EN ÖNEMLİ KURAL\n\nCevapların tamamını sadece JSON olarak döndür.\nJSON dışında 1 karakter bile yazma."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -6640,
+        -1488
+      ],
+      "id": "f91f61a5-3eb8-4e6a-9fa4-31d792756a79",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -6656,
+        -1264
+      ],
+      "id": "1c50ba8e-aa2a-454d-a81a-186f58418273",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "KJqSgtzYZWdZmxPm",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.data.sessionId }}\n",
+        "contextWindowLength": 50
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -6528,
+        -1264
+      ],
+      "id": "bca7c452-1ed4-47f4-8d59-f8a14504ecce",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Sohbet",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -7040,
+        -1488
+      ],
+      "id": "0d07f9ca-d33d-45c4-ba27-f6f6dcc4aa07",
+      "name": "Webhook1",
+      "webhookId": "f4f865e4-eaf0-4683-87fe-1dde580478d8",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "61eb0655-8df5-4bee-a759-0231a44dd054",
+              "name": "ChatInput",
+              "value": "={{ $json.body.mesaj }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6848,
+        -1488
+      ],
+      "id": "cdaeb3c6-62e6-485b-9c7d-c62664257e4c",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.output | jsonParse }}\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -4016,
+        -1152
+      ],
+      "id": "b3323a9d-3498-456a-ade2-085248569571",
+      "name": "cevap evet"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "58bf7665-6d2c-4d86-a6cb-aae3ca5fad14",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -6320,
+        -1488
+      ],
+      "id": "864da852-4151-4500-8ef2-f7daf00d1432",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -6032,
+        -1536
+      ],
+      "id": "03108723-5b15-40bc-bccb-85e0d2489c65",
+      "name": "cevap hayır"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Context Init",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Müşteri Hatalı mesaj",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Müşteri Doğru Sipariş Maili",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Firma Doğru Sipariş Maili",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Firma Hatalı Sipariş Maili",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Müşteri Hatalı mesaj": {
+      "main": [
+        [
+          {
+            "node": "cevap evet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Firma Doğru Sipariş Maili": {
+      "main": [
+        [
+          {
+            "node": "cevap evet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Müşteri Doğru Sipariş Maili": {
+      "main": [
+        [
+          {
+            "node": "cevap evet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Firma Hatalı Sipariş Maili": {
+      "main": [
+        [
+          {
+            "node": "cevap evet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Context Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Context Init": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Context Update": {
+      "main": [
+        []
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cevap evet": {
+      "main": [
+        []
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "cevap hayır",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "470e7edc-3142-469c-adfd-4ebe7ede2d55",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "77a8f3562514c293e84c6e363931c4fa3d90bc83870798d6a5a6c44142f34e55"
+  },
+  "id": "owHsf8BNiC4FEIyG",
+  "tags": []
+}
