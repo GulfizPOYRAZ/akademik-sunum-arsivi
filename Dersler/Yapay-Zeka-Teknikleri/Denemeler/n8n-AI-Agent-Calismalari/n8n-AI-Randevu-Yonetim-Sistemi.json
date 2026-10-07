@@ -1,0 +1,376 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.ChatInput }}",
+        "options": {
+          "systemMessage": "==🎯 Role of the Assistant\\nYou are a virtual assistant specializing in appointment management for Gülfiz. Your goal is to schedule, modify, and cancel appointments accurately, ensuring real availability while providing a smooth experience for customers. ALWAYS answer in the same language in which the question was asked.\\n\\n🕒 Office Hours\\nMonday - Friday: 9:00 AM - 8:00 PM\\nSaturday: 9:00 AM - 1:00 PM\\nSunday: ❌ Closed\\nConsultation Duration: 50 minutes\\nBreak Between customers: 10 minutes\\n\\n📅 APPOINTMENT BOOKING PROCESS\\n\\n1️⃣ Request Customer Information (Mandatory):\\n- Full Name\\n- Phone Number\\n- Desired Date and Time\\n\\nAlways set variables: name for Full Name, phone for Phone Number, and time for Desired Date and Time.\\n\\n2️⃣ Availability Check:\\n- If the requested time is outside office hours → offer only available slots.\\n- If the requested time is available, ask for confirmation and book it.\\n- If the requested time is unavailable, apologize and suggest actual available slots on the requested day.\\n\\n🚨 Do not confirm the appointment immediately—you must receive the customer's confirmation first. But only ask ONCE for confirmation.\\n\\n3️⃣ Confirmation & Calendar Update:\\n- Confirm availability with the customer before finalizing.\\n- Update Google Calendar after every booking.\\n- Google Calendar Event Title: \\\"Randevu: [Customer Name]\\\"\\n- Google Calendar Event Description: \\\"Telefon: [Phone Number]\\\"\\n\\n🔄 APPOINTMENT MODIFICATION PROCESS\\n\\nWhen a customer wants to CHANGE their appointment:\\n\\n1️⃣ Request Verification Information:\\n- Full Name (must match exactly)\\n- Phone Number (must match exactly)\\n\\n2️⃣ Search for Existing Appointment:\\n- Use \\\"Search Events\\\" tool to find the appointment\\n- Verify that BOTH name AND phone number match the existing appointment\\n- If no matching appointment is found, inform the customer politely\\n\\n3️⃣ Request New Date/Time:\\n- Ask for the new desired date and time\\n- Check availability using \\\"Check availability\\\" tool\\n\\n4️⃣ Confirm and Update:\\n- Ask for final confirmation\\n- Use \\\"Update Event\\\" tool to modify the appointment\\n- Confirm the change with the customer\\n\\n❌ APPOINTMENT CANCELLATION PROCESS\\n\\nWhen a customer wants to CANCEL their appointment:\\n\\n1️⃣ Request Verification Information:\\n- Full Name (must match exactly)\\n- Phone Number (must match exactly)\\n\\n2️⃣ Search for Existing Appointment:\\n- Use \\\"Search Events\\\" tool to find the appointment\\n- Verify that BOTH name AND phone number match the existing appointment\\n- If no matching appointment is found, inform the customer politely\\n\\n3️⃣ Confirm Cancellation:\\n- Show the appointment details (date, time)\\n- Ask for final confirmation to cancel\\n- Use \\\"Cancel Event\\\" tool to delete the appointment\\n- Confirm the cancellation with the customer\\n\\n🔒 SECURITY RULES\\n- NEVER modify or cancel an appointment without verifying both name AND phone number\\n- ALWAYS use \\\"Search Events\\\" first to verify the appointment exists\\n- NEVER proceed with cancellation/modification if name or phone doesn't match\\n- If verification fails, politely inform: \\\"I couldn't find an appointment matching this information. Please check your name and phone number.\\\"\\n\\n##Tools Available:\\n- \\\"Check availability\\\": Check available time slots\\n- \\\"Create event\\\": Book a new appointment\\n- \\\"Search Events\\\": Find existing appointments by name and phone\\n- \\\"Update Event\\\": Modify an existing appointment\\n- \\\"Cancel Event\\\": Delete an existing appointment\\n\\n💬 Communication Guidelines\\n✅ Respond clearly, professionally, and in a friendly manner\\n✅ Always confirm final actions with the customer\\n✅ Ensure Google Calendar is updated after every operation\\n✅ Provide clear feedback after each action (booking, modification, cancellation)\\n✅ If unsure about customer intent (book vs modify vs cancel), ask for clarification\\n\\n📅 Today's date: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -3424,
+        -912
+      ],
+      "id": "b0a4ab04-5652-42ad-b188-5ca50e8bca4d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "gpoyraz3335@gmail.com",
+          "mode": "list",
+          "cachedResultName": "gpoyraz3335@gmail.com"
+        },
+        "start": "={{ $fromAI('Start', `Return ISO-8601 in Europe/Istanbul timezone (+03:00). If missing offset, assume +03:00.`, 'string') }}",
+        "end": "={{ $fromAI('End', `Return ISO-8601 in Europe/Istanbul timezone (+03:00). If missing offset, assume +03:00.`, 'string') }}",
+        "additionalFields": {
+          "description": "={{ 'Telefon: ' + $fromAI('Phone_Number', '', 'string') }}",
+          "summary": "={{ 'Randevu: ' + $fromAI('name', '', 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -3008,
+        -672
+      ],
+      "id": "a45b3680-3295-49ec-b35c-d9841f1ebda2",
+      "name": "Takvim",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "3ZTvQ4hqRJ9OXu6x",
+          "name": "Benim"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "gpoyraz3335@gmail.com",
+          "mode": "list",
+          "cachedResultName": "gpoyraz3335@gmail.com"
+        },
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start_Time', ` Return ISO-8601 in Europe/Istanbul timezone (+03:00). If missing offset, assume +03:00.`, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End_Time', `Return ISO-8601 in Europe/Istanbul timezone (+03:00). If missing offset, assume +03:00.`, 'string') }}",
+        "options": {
+          "outputFormat": "availability",
+          "timezone": {
+            "__rl": true,
+            "value": "Europe/Istanbul",
+            "mode": "list",
+            "cachedResultName": "Europe/Istanbul"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -3184,
+        -672
+      ],
+      "id": "f003ff14-fd73-4726-ab91-7643733b988d",
+      "name": "Get availability in a calendar in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y6gb52EnnsqJdQMc",
+          "name": "Benim"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "63f41401-e36b-43e4-9b40-33da2bdf4010",
+              "name": "ChatInput",
+              "value": "={{$json[\"body\"]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3600,
+        -912
+      ],
+      "id": "649235c7-d028-410e-9b4b-8a9b5e08eb15",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "gpoyraz3335@gmail.com",
+          "mode": "list",
+          "cachedResultName": "gpoyraz3335@gmail.com"
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -2544,
+        -736
+      ],
+      "id": "a1f80d66-a13d-405b-9a6f-95494969613d",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y6gb52EnnsqJdQMc",
+          "name": "Benim"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "gpoyraz3335@gmail.com",
+          "mode": "list",
+          "cachedResultName": "gpoyraz3335@gmail.com"
+        },
+        "eventId": "={{ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -2816,
+        -688
+      ],
+      "id": "71dc6f55-7596-43b1-a7f3-0060766f25a9",
+      "name": "Delete an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y6gb52EnnsqJdQMc",
+          "name": "Benim"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "gpt-3.5-turbo"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -3824,
+        -736
+      ],
+      "id": "732f20f1-0959-4713-9ab9-648ff347ee9a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "cNL0arW2qNraMewJ",
+          "name": "benim Openai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Randevum",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -3824,
+        -912
+      ],
+      "id": "2d5d9daa-70fb-438d-9b32-0923a60f672b",
+      "name": "Webhook",
+      "webhookId": "0ffd17bf-77b2-4e8a-824a-94cac00417d5"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -3072,
+        -912
+      ],
+      "id": "0e79d3a9-a907-4210-ab0e-5a672b9e9fab",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Edit Fields').item.json.ChatInput }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -3424,
+        -704
+      ],
+      "id": "a4ab8038-37a8-4a34-b0f4-f5eb77dafc20",
+      "name": "Simple Memory",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -3568,
+        -704
+      ],
+      "id": "01e8287f-57c6-45fd-96f5-3b53ffe66e9e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "KJqSgtzYZWdZmxPm",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Takvim": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get availability in a calendar in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2cb41ad6-0ab2-4fcd-a7a3-52a98293f453",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "77a8f3562514c293e84c6e363931c4fa3d90bc83870798d6a5a6c44142f34e55"
+  },
+  "id": "objv6r1B8RSgABbe",
+  "tags": []
+}

@@ -1,0 +1,164 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "355e655c-0f4f-4cdd-912c-54fec35383b6",
+      "name": "When chat message received",
+      "webhookId": "067dd90d-c63a-4313-80d5-0aa11b5e486c"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "e8797765-6f7b-43c8-b995-d71f65604291",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        288,
+        208
+      ],
+      "id": "2caf9ef5-c4f2-4036-8ff5-7c1127a31a10",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "KJqSgtzYZWdZmxPm",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        208
+      ],
+      "id": "c525f584-f729-4598-9aa3-6cda8ace2385",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "url": "https://www.exchangerate-api.com/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        576,
+        208
+      ],
+      "id": "932c62c2-1659-4795-8a2b-fe19468d64e3",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "content": "# gülfiz\n## gülfiz\n### gülfiz udemy :\nhttps://www.udemy.com/course/sifirdan-ileri-seviyeye-python/learn/lecture/7591124#overview",
+        "height": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        160
+      ],
+      "typeVersion": 1,
+      "id": "85cbf889-fa3f-4e51-b970-482642e2949c",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Istanbul",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1
+  },
+  "versionId": "1554255f-6ea3-4c83-9fba-2ecfe0a6dc5a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "77a8f3562514c293e84c6e363931c4fa3d90bc83870798d6a5a6c44142f34e55"
+  },
+  "id": "MP2GG0Vn6cREqrGD",
+  "tags": [
+    {
+      "name": "ilk çalışma",
+      "id": "ERWp87EBJlbFymuH",
+      "createdAt": "2025-10-02T12:03:29.103Z",
+      "updatedAt": "2025-10-02T12:03:29.103Z"
+    }
+  ]
+}
