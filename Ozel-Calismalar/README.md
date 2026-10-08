@@ -8,4 +8,4 @@ Klinik bir yüksek lisans araştırması kapsamında tez yazımı, veri hazırla
 
 Proje:
 
-[Projeyi görüntüle](./Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi)
+[Projeyi görüntüle](Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi/)
