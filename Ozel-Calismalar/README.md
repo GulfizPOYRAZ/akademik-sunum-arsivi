@@ -8,4 +8,5 @@ Klinik bir yüksek lisans araştırması kapsamında tez yazımı, veri hazırla
 
 Proje klasörü:
 
-`Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi`   [Projeyi görüntüle](Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi/)
+`Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi`   
+Projeyi görüntüle:(Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi/)
