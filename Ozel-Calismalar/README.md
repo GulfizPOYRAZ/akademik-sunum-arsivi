@@ -6,6 +6,6 @@ Bu klasör, akademik ve teknik kapsamda yürütülen özel çalışmaların düz
 
 Klinik bir yüksek lisans araştırması kapsamında tez yazımı, veri hazırlama, biyostatistiksel analiz ve akademik raporlama süreçlerini içeren çalışma.
 
-Proje:
+Proje klasörü:
 
-[Projeyi görüntüle](Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi/)
+`Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi`   [Projeyi görüntüle](Klinik-Tez-Yazimi-ve-Biyostatistik-Analizi/)
