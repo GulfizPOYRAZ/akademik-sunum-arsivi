@@ -12,5 +12,3 @@ Bu klasör, Wellfound platformunda kariyer ve iş başvurusu süreçleri kapsam�
 
 Uygun iş ilanları takip edilmektedir.
 
-
-
