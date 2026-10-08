@@ -50,6 +50,7 @@ Pilot analizde:
 - `Clinical_Data_Analysis_Report_English.pdf`
 - `Clinical_Data_Analysis_Report_Sample.pdf`
 - `Vestibular_Migraine_Study_Biostatistics_Report.docx`
+- `Vestibuler_Migren_Analizi.py`
 
 ## Gizlilik
 
