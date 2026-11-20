@@ -11,3 +11,5 @@ Bu proje, 5.000 simüle edilmiş acil servis hasta kaydı kullanılarak Python v
 - Veri görselleştirme ve akademik değerlendirmeler
 
 **Not:** Bu çalışma simüle edilmiş verilerle gerçekleştirilmiştir. Bulgular gerçek hastaneleri veya hasta popülasyonlarını temsil etmemektedir.
+
+[Analiz defterini görüntüle](Acil_Servis_Veri_Analizi.ipynb)
