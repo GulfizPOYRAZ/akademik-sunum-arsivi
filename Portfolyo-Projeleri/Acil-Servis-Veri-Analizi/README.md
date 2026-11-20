@@ -13,5 +13,7 @@ Bu proje, 5.000 simüle edilmiş acil servis hasta kaydı kullanılarak Python v
 **Not:** Bu çalışma simüle edilmiş verilerle gerçekleştirilmiştir. Bulgular gerçek hastaneleri veya hasta popülasyonlarını temsil etmemektedir.
 
 [Analiz defterini görüntüle](Acil_Servis_Veri_Analizi.ipynb)
+
 **Kullanılan veri dosyası:** `ER Bekleme Süresi Veri Kümesi.csv`
+
 **Veri seti açıklaması:** [TXT dosyasını görüntüle](Acil%20Servis%20Bekleme%20Süresi%20Verilerine%20Genel%20Bakış.txt)
