@@ -14,6 +14,6 @@ Bu proje, 5.000 simüle edilmiş acil servis hasta kaydı kullanılarak Python v
 
 [Analiz defterini görüntüle](Acil_Servis_Veri_Analizi.ipynb)
 
-**Kullanılan veri dosyası:** `ER Bekleme Süresi Veri Kümesi.csv`
+**Kullanılan veri dosyası:** `ER Wait Time Dataset.csv`
 
 **Veri seti açıklaması:** [TXT dosyasını görüntüle](ER%20Wait%20Time%20Data%20Overview.txt)
