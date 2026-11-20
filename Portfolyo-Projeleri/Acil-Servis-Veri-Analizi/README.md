@@ -10,4 +10,4 @@ Bu proje, 5.000 simüle edilmiş acil servis hasta kaydı kullanılarak Python v
 - İstatistiksel testler ve çok değişkenli regresyon
 - Veri görselleştirme ve akademik değerlendirmeler
 
-**Not:** Çalışma simüle edilmiş verilerle gerçekleştirilmiştir. Bulgular gerçek hastanelerin performansını temsil etmemektedir.
+**Not:** Bu çalışma simüle edilmiş verilerle gerçekleştirilmiştir. Bulgular gerçek hastaneleri veya hasta popülasyonlarını temsil etmemektedir.
